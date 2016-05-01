@@ -1,0 +1,288 @@
+==20058== Memcheck, a memory error detector
+==20058== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==20058== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==20058== Command: ./uffsdb
+==20058== Parent PID: 19173
+==20058== 
+==20058== 
+==20058== HEAP SUMMARY:
+==20058==     in use at exit: 34,779 bytes in 297 blocks
+==20058==   total heap usage: 2,416 allocs, 2,119 frees, 15,163,859 bytes allocated
+==20058== 
+==20058== 2 bytes in 2 blocks are definitely lost in loss record 2 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40AC61: setColumnCreate (parser.c:107)
+==20058==    by 0x40BBB5: yyparse (yacc.y:155)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 3 bytes in 3 blocks are definitely lost in loss record 3 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40AC86: setColumnCreate (parser.c:108)
+==20058==    by 0x40BBB5: yyparse (yacc.y:155)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 3 bytes in 3 blocks are definitely lost in loss record 4 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40ACAB: setColumnCreate (parser.c:109)
+==20058==    by 0x40BBB5: yyparse (yacc.y:155)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 4 bytes in 1 blocks are definitely lost in loss record 6 of 51
+==20058==    at 0x4C2AB9D: realloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40AE2C: setColumnSizeCreate (parser.c:128)
+==20058==    by 0x40BB88: yyparse (yacc.y:151)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 6 bytes in 2 blocks are definitely lost in loss record 7 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x405D05: getInsertedValue (sqlcommands.c:88)
+==20058==    by 0x4073C1: insert (sqlcommands.c:542)
+==20058==    by 0x40B3BB: interface (parser.c:234)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 7 bytes in 1 blocks are definitely lost in loss record 9 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40260B: dbInit (database.c:215)
+==20058==    by 0x408ADE: main (uffsdb.c:28)
+==20058== 
+==20058== 7 bytes in 1 blocks are definitely lost in loss record 10 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40A76B: connect (parser.c:37)
+==20058==    by 0x40B2FC: interface (parser.c:214)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 8 bytes in 4 blocks are definitely lost in loss record 12 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40428B: insereValor (dictionary.c:643)
+==20058==    by 0x4075BA: insert (sqlcommands.c:566)
+==20058==    by 0x40B3BB: interface (parser.c:234)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 8 bytes in 4 blocks are definitely lost in loss record 13 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40428B: insereValor (dictionary.c:643)
+==20058==    by 0x4073D8: insert (sqlcommands.c:542)
+==20058==    by 0x40B3BB: interface (parser.c:234)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 9 bytes in 1 blocks are definitely lost in loss record 14 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40A76B: connect (parser.c:37)
+==20058==    by 0x40B92D: yyparse (yacc.y:64)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 13 bytes in 3 blocks are definitely lost in loss record 15 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40ACE1: setColumnCreate (parser.c:110)
+==20058==    by 0x40BBB5: yyparse (yacc.y:155)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 30 bytes in 6 blocks are definitely lost in loss record 17 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x401379: getPage (buffer.c:84)
+==20058==    by 0x4027A5: existeAtributo (dictionary.c:70)
+==20058==    by 0x405F64: verificaChaveFK (sqlcommands.c:166)
+==20058==    by 0x406AA6: finalizaInsert (sqlcommands.c:367)
+==20058==    by 0x407678: insert (sqlcommands.c:579)
+==20058==    by 0x40B3BB: interface (parser.c:234)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 40 bytes in 2 blocks are definitely lost in loss record 18 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x405753: TrocaArquivosObj (misc.c:194)
+==20058==    by 0x40326C: procuraObjectArquivo (dictionary.c:304)
+==20058==    by 0x408638: excluirTabela (sqlcommands.c:877)
+==20058==    by 0x40B415: interface (parser.c:249)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 196 (56 direct, 140 indirect) bytes in 4 blocks are definitely lost in loss record 24 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x4081F7: excluirTabela (sqlcommands.c:800)
+==20058==    by 0x40B415: interface (parser.c:249)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 200 bytes in 5 blocks are definitely lost in loss record 25 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x404914: printTable (dictionary.c:808)
+==20058==    by 0x40B9C8: yyparse (yacc.y:80)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 200 bytes in 5 blocks are definitely lost in loss record 26 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x404936: printTable (dictionary.c:809)
+==20058==    by 0x40B9C8: yyparse (yacc.y:80)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 200 bytes in 5 blocks are definitely lost in loss record 27 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x404958: printTable (dictionary.c:810)
+==20058==    by 0x40B9C8: yyparse (yacc.y:80)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 200 bytes in 5 blocks are definitely lost in loss record 28 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40497A: printTable (dictionary.c:811)
+==20058==    by 0x40B9C8: yyparse (yacc.y:80)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 240 bytes in 2 blocks are definitely lost in loss record 29 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x4047FC: printTable (dictionary.c:792)
+==20058==    by 0x40B9C8: yyparse (yacc.y:80)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 310 bytes in 36 blocks are definitely lost in loss record 32 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x401379: getPage (buffer.c:84)
+==20058==    by 0x4027A5: existeAtributo (dictionary.c:70)
+==20058==    by 0x4063ED: verificaChavePK (sqlcommands.c:257)
+==20058==    by 0x406940: finalizaInsert (sqlcommands.c:351)
+==20058==    by 0x407678: insert (sqlcommands.c:579)
+==20058==    by 0x40B3BB: interface (parser.c:234)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 310 bytes in 36 blocks are definitely lost in loss record 33 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x401379: getPage (buffer.c:84)
+==20058==    by 0x4064E3: verificaChavePK (sqlcommands.c:277)
+==20058==    by 0x406940: finalizaInsert (sqlcommands.c:351)
+==20058==    by 0x407678: insert (sqlcommands.c:579)
+==20058==    by 0x40B3BB: interface (parser.c:234)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 349 (256 direct, 93 indirect) bytes in 4 blocks are definitely lost in loss record 34 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x4043C7: insereValor (dictionary.c:682)
+==20058==    by 0x4075BA: insert (sqlcommands.c:566)
+==20058==    by 0x40B3BB: interface (parser.c:234)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 360 (240 direct, 120 indirect) bytes in 2 blocks are definitely lost in loss record 35 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x403DD7: adicionaCampo (dictionary.c:533)
+==20058==    by 0x408A05: createTable (sqlcommands.c:953)
+==20058==    by 0x40B3ED: interface (parser.c:243)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 360 bytes in 3 blocks are definitely lost in loss record 36 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x408475: excluirTabela (sqlcommands.c:842)
+==20058==    by 0x40B415: interface (parser.c:249)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 420 bytes in 45 blocks are definitely lost in loss record 37 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x401379: getPage (buffer.c:84)
+==20058==    by 0x40605E: verificaChaveFK (sqlcommands.c:186)
+==20058==    by 0x406AA6: finalizaInsert (sqlcommands.c:367)
+==20058==    by 0x407678: insert (sqlcommands.c:579)
+==20058==    by 0x40B3BB: interface (parser.c:234)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 480 bytes in 1 blocks are definitely lost in loss record 38 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x4037EF: leSchema (dictionary.c:403)
+==20058==    by 0x405E75: verifyFK (sqlcommands.c:127)
+==20058==    by 0x408A4A: createTable (sqlcommands.c:955)
+==20058==    by 0x40B3ED: interface (parser.c:243)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 480 bytes in 2 blocks are definitely lost in loss record 39 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x402C4D: procuraAtributoFK (dictionary.c:212)
+==20058==    by 0x4084A2: excluirTabela (sqlcommands.c:843)
+==20058==    by 0x40B415: interface (parser.c:249)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 480 bytes in 4 blocks are definitely lost in loss record 40 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40827C: excluirTabela (sqlcommands.c:808)
+==20058==    by 0x40B415: interface (parser.c:249)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 560 bytes in 1 blocks are possibly lost in loss record 41 of 51
+==20058==    at 0x4C2A9C7: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x4012174: _dl_allocate_tls (in /usr/lib64/ld-2.21.so)
+==20058==    by 0x4E3D045: pthread_create@@GLIBC_2.2.5 (in /usr/lib64/libpthread-2.21.so)
+==20058==    by 0x40B2E1: interface (parser.c:211)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 600 bytes in 2 blocks are definitely lost in loss record 42 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x407BD3: procuraSchemaArquivo (sqlcommands.c:691)
+==20058==    by 0x40860E: excluirTabela (sqlcommands.c:872)
+==20058==    by 0x40B415: interface (parser.c:249)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 602 (256 direct, 346 indirect) bytes in 4 blocks are definitely lost in loss record 43 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x4043C7: insereValor (dictionary.c:682)
+==20058==    by 0x4073D8: insert (sqlcommands.c:542)
+==20058==    by 0x40B3BB: interface (parser.c:234)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 720 bytes in 2 blocks are definitely lost in loss record 44 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x402C4D: procuraAtributoFK (dictionary.c:212)
+==20058==    by 0x40829D: excluirTabela (sqlcommands.c:809)
+==20058==    by 0x40B415: interface (parser.c:249)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 840 bytes in 2 blocks are definitely lost in loss record 45 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x4037EF: leSchema (dictionary.c:403)
+==20058==    by 0x405ABB: abreTabela (sqlcommands.c:32)
+==20058==    by 0x4047F2: printTable (dictionary.c:790)
+==20058==    by 0x40B9C8: yyparse (yacc.y:80)
+==20058==    by 0x4E3C554: start_thread (in /usr/lib64/libpthread-2.21.so)
+==20058== 
+==20058== 960 bytes in 8 blocks are definitely lost in loss record 46 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40684A: finalizaInsert (sqlcommands.c:338)
+==20058==    by 0x407678: insert (sqlcommands.c:579)
+==20058==    by 0x40B3BB: interface (parser.c:234)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 1,200 bytes in 3 blocks are definitely lost in loss record 47 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x4037EF: leSchema (dictionary.c:403)
+==20058==    by 0x405ABB: abreTabela (sqlcommands.c:32)
+==20058==    by 0x40846B: excluirTabela (sqlcommands.c:840)
+==20058==    by 0x40B415: interface (parser.c:249)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 1,800 bytes in 4 blocks are definitely lost in loss record 48 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x4037EF: leSchema (dictionary.c:403)
+==20058==    by 0x405ABB: abreTabela (sqlcommands.c:32)
+==20058==    by 0x4081D9: excluirTabela (sqlcommands.c:797)
+==20058==    by 0x40B415: interface (parser.c:249)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 2,614 (2,304 direct, 310 indirect) bytes in 3 blocks are definitely lost in loss record 49 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x40128F: getPage (buffer.c:67)
+==20058==    by 0x407810: imprime (sqlcommands.c:626)
+==20058==    by 0x40B3DE: interface (parser.c:240)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== 3,480 bytes in 8 blocks are definitely lost in loss record 50 of 51
+==20058==    at 0x4C28C50: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20058==    by 0x4037EF: leSchema (dictionary.c:403)
+==20058==    by 0x405ABB: abreTabela (sqlcommands.c:32)
+==20058==    by 0x406885: finalizaInsert (sqlcommands.c:341)
+==20058==    by 0x407678: insert (sqlcommands.c:579)
+==20058==    by 0x40B3BB: interface (parser.c:234)
+==20058==    by 0x408AF2: main (uffsdb.c:30)
+==20058== 
+==20058== LEAK SUMMARY:
+==20058==    definitely lost: 16,732 bytes in 228 blocks
+==20058==    indirectly lost: 1,009 bytes in 62 blocks
+==20058==      possibly lost: 560 bytes in 1 blocks
+==20058==    still reachable: 16,478 bytes in 6 blocks
+==20058==         suppressed: 0 bytes in 0 blocks
+==20058== Reachable blocks (those to which a pointer was found) are not shown.
+==20058== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==20058== 
+==20058== For counts of detected and suppressed errors, rerun with: -v
+==20058== ERROR SUMMARY: 38 errors from 38 contexts (suppressed: 0 from 0)
