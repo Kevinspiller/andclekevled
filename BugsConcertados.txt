@@ -1,7 +1,6 @@
 Possíveis erros:
 
------------------------------------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------
+
 Primeiro – Vazamento de Memória.
 
 ==20058== 6 bytes in 2 blocks are definitely lost in loss record 7 of 51
@@ -23,8 +22,6 @@ Primeiro – Vazamento de Memória.
 
 Solução: free(valorCampo); → antes do return no final da função.
 
------------------------------------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------
 
 
 Segundo – Vazamento de Memória
@@ -37,15 +34,3 @@ Segundo – Vazamento de Memória
  Na função dbInit em database.c é alocado espaço para um ponteiro chamado name, que é enviado como parâmetro na chamada a função createDB, a função createDB também está no arquivo database.c, e db_name recebe name. E na função inteira em nenhum momento é liberado o espaço alocado em db_name.
 
 Solução: free(db_name); → no final da função createDB.
-
-
-
-
-
-
-
-   
-
-
-
-
