@@ -37,3 +37,15 @@ Segundo – Vazamento de Memória
  Na função dbInit em database.c é alocado espaço para um ponteiro chamado name, que é enviado como parâmetro na chamada a função createDB, a função createDB também está no arquivo database.c, e db_name recebe name. E na função inteira em nenhum momento é liberado o espaço alocado em db_name.
 
 Solução: free(db_name); → no final da função createDB.
+
+
+
+
+
+
+
+   
+
+
+
+
