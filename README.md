@@ -119,3 +119,4 @@ insert into funcionario values('Joao',-23);
 
 15)Problema na utilização das setas para voltar código digitado usando a seta up e até mesmo para andar sobre os caracteres da linha usando as setas left e right.
 --------------------------------------------------------------------
+
