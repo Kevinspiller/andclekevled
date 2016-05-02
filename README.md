@@ -1,6 +1,8 @@
 # andclekevledmar
 Relação dos Bugs não concertados:
 
+  O arquivo log-erros.txt, é o report gerado pelo Valgrind, quanto aos vazamentos de memória. 
+
 1) Vazamento de memória causado pela linha 403 da função leSchema do arquivo dictonary.c.
 Linha 403:   tp_table *esquema = (tp_table *)malloc(sizeof(tp_table)*(objeto.qtdCampos+1));
 Funções envolvidas em ordem de chamada pelo programa, com as linhas correspondentes:
