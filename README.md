@@ -73,11 +73,9 @@ Funções envolvidas em ordem de chamada pelo programa, com as linhas correspond
 :createTable,arquivo:sqlcommands.c:953
 :adicionaCampo,arquivo:dictonary.c:533 -> onde ocorre o vazamento de memória.
 Dados sobre o vazamento: 360(240 diretos,120 indiretos) bytes
+
 =======
-->imprime,arquivo:sqlcommands.c:626
-->getPage,arquivo:buffer.c:67 -> onde ocorre o vazamento de memória.
-Dados sobre o vazamento:
-2,614 (2,304 direct, 310 indirect) bytes in 3 blocks are definitely lost in loss record 49 of 51
+
 -----------------------------------------------------------------------------------------------
 
 11)Apos feito a conexão com o banco, se digitar ;;;; (ou seja varias vezes) retorna: uffsdb=# uffsdb=# uffsdb=# uffsdb=#. No prompt imprime o nome do banco de acordo com a quantidade de ; for digitado.
