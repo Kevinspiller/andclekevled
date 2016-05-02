@@ -31,7 +31,7 @@ Linha 212: tp_table *vetEsqm = (tp_table *)malloc(sizeof(tp_table)*objeto.qtdCam
 Funções envolvidas em ordem de chamada pelo programa, com as linhas correspondentes:
 :excluirTabela,arquivo:sqlcommands.c:809
 :procuraAtributoFK,arquivo:dictionary.c:212 -> onde ocorre o vazamento de memória.
-Dados sobre o vazamento: 720 bytes 
+Dados sobre o vazamento: 720 bytes
 
 5) (NÃO CORRIGIDO) Vazamento de memória causado pela linha 682 da função insereValor do arquivo dictionary.c.
 Linha 682: e = (column *)malloc(sizeof(column)); -*
@@ -75,7 +75,12 @@ Funções envolvidas em ordem de chamada pelo programa, com as linhas correspond
 :adicionaCampo,arquivo:dictonary.c:533 -> onde ocorre o vazamento de memória.
 Dados sobre o vazamento: 360(240 diretos,120 indiretos) bytes
 
+=======
+
+-----------------------------------------------------------------------------------------------
 11) (NÃO CORRIGIDO) Apos feito a conexão com o banco, se digitar ;;;; (ou seja varias vezes) retorna: uffsdb=# uffsdb=# uffsdb=# uffsdb=#. No prompt imprime o nome do banco de acordo com a quantidade de ; for digitado.
+
+--------------------------------------------------------------------------------------------------------------------------------------------
 
 12) (NÃO CORRIGIDO) Nomes gigantes para criação de banco, tabela e atributo dão erro de corrupção de memoria. Segue abaixo exemplos de criação deles:
 
@@ -86,6 +91,8 @@ name varchar(20));
 
 create table teste(
 nomelongodemaisextensogiganteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee integer));
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 13) (NÃO CORRIGIDO) Nome do banco aparece varias vezes no prompt, provavelmente este erro acontece varios \n foram identificado apos cada linha, no caso a seguir, foi identificado 2.
 Linhas de comando testadas:
@@ -99,6 +106,8 @@ uffsdb=# create table pessoa(
 cpf varchar(15) primary key,
 nome varchar(40));uffsdb(# uffsdb(#
 
+------------------------------------------------------------------------
+
 14) (NÃO CORRIGIDO) Tipo integer aceita numero negativo ao inserir na tupla porém transforma o numero em positivo. Exemplo:
 insert into funcionario values('Joao',-23);
 -INSERT 0 1
@@ -108,8 +117,10 @@ insert into funcionario values('Joao',-23);
 ----------------------+------------
  Joao                 | 23  
 
+------------------------------------------------------------------
 15) (NÃO CORRIGIDO) Problema na utilização das setas para voltar código digitado usando a seta up e até mesmo para andar sobre os caracteres da linha usando as setas left e right.
 
+--------------------------------------------------------------------
 16) (CORRIGIDO) Não mostra mensagem ao inserir string em char, por exemplo:
 
 create table testachar( idade integer primary key, sexo char );

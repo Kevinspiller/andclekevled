@@ -35,7 +35,7 @@
 (?i:DATABASE)					return DATABASE;
 (?i:DROP)						return DROP;
 (?i:CONTRIBUTORS)               return CONTR;
-(?i:HELP)						return HELP;
+help							return HELP;
 [\\][h]							return HELP;
 [\\][h]+[^\n]*					{invalidCommand(yytext);};
 [\\][\?]						return HELP;
