@@ -1,4 +1,4 @@
-# Exemplo de execução do SGBD Ibetres (1.5.15)
+﻿# Exemplo de execução do SGBD Ibetres (1.5.15)
 
 # Acesse o caminho "~/DBMS-Interface/Fonte/" pelo shell do seu SO
 
@@ -106,3 +106,5 @@
 
 # Para sair do shell do SGBD Ibetres, digite:
 	\q
+
+..
