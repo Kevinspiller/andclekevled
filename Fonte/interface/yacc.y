@@ -49,8 +49,9 @@ int yywrap() {
         CHAR        PRIMARY     KEY         REFERENCES  DATABASE
         DROP        OBJECT      NUMBER      VALUE       QUIT
         LIST_TABLES LIST_TABLE  ALPHANUM    CONNECT     HELP
-        LIST_DBASES CLEAR       CONTR;
+        LIST_DBASES CLEAR       CONTR		WHERE; /*ADICIONADO O WHERE PARA ELE PEGAR COMO TOKEN*/
 
+/* VERIFICAR SE DA BUG CASO DIGITE O WHERE EM MINUSCULO, SE DER ADICIONAR O WHERE EM MINUSCULO AQUI NO START*/
 start: insert | select | create_table | create_database | drop_table | drop_database
      | table_attr | list_tables | connection | exit_program | semicolon {GLOBAL_PARSER.consoleFlag = 1; return 0;}
      | parentesis_open | parentesis_close| help_pls | list_databases | clear | contributors
