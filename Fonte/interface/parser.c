@@ -237,8 +237,11 @@ int interface() {
                                 printf("WARNING: Nothing to be inserted. Command ignored.\n");
                             break;
                         case OP_SELECT_ALL:
-                            imprime(GLOBAL_DATA.objName);
+                            imprime(GLOBAL_DATA.objName, NULL); // passado parametro null para descartar o parametro do nome da coluna na função imprime em sqlcommands.c
                             break;
+						case OP_SELECT_WHERE:
+							imprime(GLOBAL_DATA.objName, GLOBAL_DATA.columnName);
+							break;
                         case OP_CREATE_TABLE:
                             createTable(&GLOBAL_DATA);
                             break;

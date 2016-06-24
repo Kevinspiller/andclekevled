@@ -589,7 +589,7 @@ void insert(rc_insert *s_insert) {
 
 
 //////////////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ mexe nessa porra aqui porra do caralho
-void imprime(char nomeTabela[]) {
+void imprime(char nomeTabela[], char nomeColuna[]) {
 
     int j,erro, x, p, cont=0;
     struct fs_objects objeto;
@@ -599,6 +599,7 @@ void imprime(char nomeTabela[]) {
         return;
     }
 
+	
     objeto = leObjeto(nomeTabela);
 
     tp_table *esquema = leSchema(objeto);
