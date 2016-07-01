@@ -44,14 +44,18 @@ int yywrap() {
 
 %%
 
+/*------------------------------------------------------------------*/
+
+/* precisa adicionar o que ele quer que pega o token aqui nessa parte e no arquivo lex.l tbm*/
+
 %token  INSERT      INTO        VALUES      SELECT      FROM
         CREATE      TABLE       INTEGER     VARCHAR     DOUBLE
         CHAR        PRIMARY     KEY         REFERENCES  DATABASE
         DROP        OBJECT      NUMBER      VALUE       QUIT
         LIST_TABLES LIST_TABLE  ALPHANUM    CONNECT     HELP
-        LIST_DBASES CLEAR       CONTR		WHERE; /*ADICIONADO O WHERE PARA ELE PEGAR COMO TOKEN*/
+        LIST_DBASES CLEAR       CONTR       WHERE;
 
-/* VERIFICAR SE DA BUG CASO DIGITE O WHERE EM MINUSCULO, SE DER ADICIONAR O WHERE EM MINUSCULO AQUI NO START*/
+/*------------------------------------------------------------------*/
 
 start: insert | select | create_table | create_database | drop_table | drop_database
      | table_attr | list_tables | connection | exit_program | semicolon {GLOBAL_PARSER.consoleFlag = 1; return 0;}
@@ -136,6 +140,14 @@ column: OBJECT {setColumnInsert(yytext);};
 
 value_list: value | value ',' value_list;
 
+/* ------------------------------------ */
+/*variavel do WHERE para poder ou não fazer select sem where, precisei criar essa variavel para isso */
+
+/* o optional da a opção de se usuario fazer o select sem o where */
+
+conditional_where: /*optional*/ | WHERE;
+
+/* ------------------------------------ */
 value: VALUE {setValueInsert(yylval.strval, 'D');}
      | NUMBER {setValueInsert(yylval.strval, 'I');}
      | ALPHANUM {setValueInsert(yylval.strval, 'S');};
@@ -174,7 +186,10 @@ create_database: CREATE DATABASE {setMode(OP_CREATE_DATABASE);} OBJECT {setObjNa
 drop_database: DROP DATABASE {setMode(OP_DROP_DATABASE);} OBJECT {setObjName(yytext);} semicolon {return 0;};
 
 /* SELECT */
-select: SELECT {setMode(OP_SELECT_ALL);} '*' FROM table_select semicolon {return 0;};
+
+/*o "conditional_where" é aquela variavel lá em cima para poder ou não fazer o select com o where */
+
+select: SELECT {setMode(OP_SELECT_ALL);} '*' FROM table_select conditional_where semicolon {return 0;};
 
 table_select: OBJECT {setObjName(yytext);};
 
