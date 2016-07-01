@@ -73,7 +73,13 @@ extern int yydebug;
     LIST_DBASES = 283,
     CLEAR = 284,
     CONTR = 285,
-    WHERE = 286
+    WHERE = 286,
+    IGUAL = 287,
+    MENOR = 288,
+    MAIOR = 289,
+    DIFERENTE = 290,
+    MAIOR_IGUAL = 291,
+    MENOR_IGUAL = 292
   };
 #endif
 /* Tokens.  */
@@ -106,6 +112,12 @@ extern int yydebug;
 #define CLEAR 284
 #define CONTR 285
 #define WHERE 286
+#define IGUAL 287
+#define MENOR 288
+#define MAIOR 289
+#define DIFERENTE 290
+#define MAIOR_IGUAL 291
+#define MENOR_IGUAL 292
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -119,7 +131,7 @@ union YYSTYPE
     int subtok;
     char *strval;
 
-#line 123 "y.tab.h" /* yacc.c:1909  */
+#line 135 "y.tab.h" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

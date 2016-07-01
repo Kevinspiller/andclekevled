@@ -36,6 +36,13 @@
 (?i:DROP)						return DROP;
 (?i:CONTRIBUTORS)               return CONTR;
 (?i:WHERE)						return WHERE;
+[=]								return IGUAL;
+[<]								return MENOR;
+[>]								return MAIOR;
+[!]+[=]							return DIFERENTE;
+[<]+[>]							return DIFERENTE;
+[>]+[=]							return MAIOR_IGUAL;
+[<]+[=]							return MENOR_IGUAL;
 help							return HELP;
 [\\][h]							return HELP;
 [\\][h]+[^\n]*					{invalidCommand(yytext);};

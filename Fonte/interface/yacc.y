@@ -44,7 +44,7 @@ int yywrap() {
 
 %%
 
-/*------------------------------------------------------------------*/
+/*=============================================================================*/
 
 /* precisa adicionar o que ele quer que pega o token aqui nessa parte e no arquivo lex.l tbm*/
 
@@ -53,9 +53,10 @@ int yywrap() {
         CHAR        PRIMARY     KEY         REFERENCES  DATABASE
         DROP        OBJECT      NUMBER      VALUE       QUIT
         LIST_TABLES LIST_TABLE  ALPHANUM    CONNECT     HELP
-        LIST_DBASES CLEAR       CONTR       WHERE;
+        LIST_DBASES CLEAR       CONTR       WHERE       IGUAL
+        MENOR       MAIOR       DIFERENTE   MAIOR_IGUAL MENOR_IGUAL;
 
-/*------------------------------------------------------------------*/
+/*============================================================================*/
 
 start: insert | select | create_table | create_database | drop_table | drop_database
      | table_attr | list_tables | connection | exit_program | semicolon {GLOBAL_PARSER.consoleFlag = 1; return 0;}
@@ -140,14 +141,18 @@ column: OBJECT {setColumnInsert(yytext);};
 
 value_list: value | value ',' value_list;
 
-/* ------------------------------------ */
+/* =================================================================================================================== */
+
 /*variavel do WHERE para poder ou não fazer select sem where, precisei criar essa variavel para isso */
 
 /* o optional da a opção de se usuario fazer o select sem o where */
 
-conditional_where: /*optional*/ | WHERE;
+condition_where: /*optional*/ | WHERE condition;
 
-/* ------------------------------------ */
+condition: IGUAL | MENOR | MAIOR | DIFERENTE | MAIOR_IGUAL | MENOR_IGUAL;
+
+/* =================================================================================================================== */
+
 value: VALUE {setValueInsert(yylval.strval, 'D');}
      | NUMBER {setValueInsert(yylval.strval, 'I');}
      | ALPHANUM {setValueInsert(yylval.strval, 'S');};
@@ -189,7 +194,7 @@ drop_database: DROP DATABASE {setMode(OP_DROP_DATABASE);} OBJECT {setObjName(yyt
 
 /*o "conditional_where" é aquela variavel lá em cima para poder ou não fazer o select com o where */
 
-select: SELECT {setMode(OP_SELECT_ALL);} '*' FROM table_select conditional_where semicolon {return 0;};
+select: SELECT {setMode(OP_SELECT_ALL);} '*' FROM table_select condition_where semicolon {return 0;};
 
 table_select: OBJECT {setObjName(yytext);};
 
