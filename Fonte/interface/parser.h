@@ -103,3 +103,7 @@ void clearGlobalStructs();
  * dos tokens iniciais.
  */
 void setMode(char mode);
+
+void addTypeValue (int type);
+
+void addValueTest (char *value);
