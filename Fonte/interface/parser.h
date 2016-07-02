@@ -107,3 +107,7 @@ void setMode(char mode);
 void addTypeValue (int type);
 
 void addValueTest (char *value);
+
+void setColumnProjection (char **name);
+
+void setColumnTest (char **name);
