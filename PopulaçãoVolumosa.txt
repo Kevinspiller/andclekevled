@@ -61,7 +61,7 @@ insert into Ambulatorio values (335,9,32);
 insert into Medico values (015875123,'DrIgor',30,'Palmitos','cardiologista',312);
 insert into Medico values (015875124,'DrMarcos',30,'Pato_Branco','dermatologista',313);
 insert into Medico values (015875125,'DrPedro',31,'Chapeco','pediatra',314);
-insert into Medico values (015875126,'DrPaulo',29,'Chapeco','ginecologista',315);
+'insert into Medico values (015875126,'DrPaulo',29,'Chapeco','ginecologista',315);
 insert into Medico values (015875127,'DrRegis',47,'Palmitos','oftalmologista',316);
 insert into Medico values (015875128,'DrEliton',53,'Caibi','clinico_geral',311);
 insert into Medico values (015875129,'DrRicardo',38,'Xanxere','dermatologista',317);

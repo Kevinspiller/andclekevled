@@ -142,18 +142,6 @@ column: OBJECT {setColumnInsert(yytext);};
 
 value_list: value | value ',' value_list;
 
-/* =================================================================================================================== */
-
-/*variavel do WHERE para poder ou não fazer select sem where, precisei criar essa variavel para isso */
-
-/* o optional da a opção de se usuario fazer o select sem o where */
-
-condition_where: /*optional*/ | WHERE condition;
-
-condition: IGUAL | MENOR | MAIOR | DIFERENTE | MAIOR_IGUAL | MENOR_IGUAL | COMPARACAO_AND | COMPARACAO_OR;
-
-/* =================================================================================================================== */
-
 value: VALUE {setValueInsert(yylval.strval, 'D');}
      | NUMBER {setValueInsert(yylval.strval, 'I');}
      | ALPHANUM {setValueInsert(yylval.strval, 'S');};
@@ -193,11 +181,24 @@ drop_database: DROP DATABASE {setMode(OP_DROP_DATABASE);} OBJECT {setObjName(yyt
 
 /* SELECT */
 
-/*o "conditional_where" é aquela variavel lá em cima para poder ou não fazer o select com o where */
-
-select: SELECT {setMode(OP_SELECT_ALL);} '*' FROM table_select condition_where semicolon {return 0;};
+select: SELECT {setMode(OP_SELECT_ALL);} columns_list FROM table_select condition_where semicolon {return 0;};
 
 table_select: OBJECT {setObjName(yytext);};
+
+columns_list: '*' | projection | projection ',' columns_list;
+
+projection: OBJECT {setColumnProjection(yytext);};
+
+
+/* WHERE */
+
+condition_where: /*optional*/ | WHERE column_test condition valor;
+
+condition: IGUAL | MENOR | MAIOR | DIFERENTE | MAIOR_IGUAL | MENOR_IGUAL | COMPARACAO_AND | COMPARACAO_OR;
+
+column_test: OBJECT {setColumnTest(yytext);};
+
+valor: OBJECT {setValor(yytext);};
 
 /* END */
 %%
