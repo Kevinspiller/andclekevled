@@ -48,13 +48,14 @@ int yywrap() {
 
 /* precisa adicionar o que ele quer que pega o token aqui nessa parte e no arquivo lex.l tbm*/
 
-%token  INSERT      INTO        VALUES      SELECT      FROM
-        CREATE      TABLE       INTEGER     VARCHAR     DOUBLE
-        CHAR        PRIMARY     KEY         REFERENCES  DATABASE
-        DROP        OBJECT      NUMBER      VALUE       QUIT
-        LIST_TABLES LIST_TABLE  ALPHANUM    CONNECT     HELP
-        LIST_DBASES CLEAR       CONTR       WHERE       IGUAL
-        MENOR       MAIOR       DIFERENTE   MAIOR_IGUAL MENOR_IGUAL;
+%token  INSERT           INTO            VALUES      SELECT      FROM
+        CREATE           TABLE           INTEGER     VARCHAR     DOUBLE
+        CHAR             PRIMARY         KEY         REFERENCES  DATABASE
+        DROP             OBJECT          NUMBER      VALUE       QUIT
+        LIST_TABLES      LIST_TABLE      ALPHANUM    CONNECT     HELP
+        LIST_DBASES      CLEAR           CONTR       WHERE       IGUAL
+        MENOR            MAIOR           DIFERENTE   MAIOR_IGUAL MENOR_IGUAL
+        COMPARACAO_AND   COMPARACAO_OR;
 
 /*============================================================================*/
 
@@ -149,7 +150,7 @@ value_list: value | value ',' value_list;
 
 condition_where: /*optional*/ | WHERE condition;
 
-condition: IGUAL | MENOR | MAIOR | DIFERENTE | MAIOR_IGUAL | MENOR_IGUAL;
+condition: IGUAL | MENOR | MAIOR | DIFERENTE | MAIOR_IGUAL | MENOR_IGUAL | COMPARACAO_AND | COMPARACAO_OR;
 
 /* =================================================================================================================== */
 

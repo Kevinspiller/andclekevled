@@ -43,6 +43,8 @@
 [<]+[>]							return DIFERENTE;
 [>]+[=]							return MAIOR_IGUAL;
 [<]+[=]							return MENOR_IGUAL;
+[&]+[&]							return COMPARACAO_AND;
+[|]+[|]							return COMPARACAO_OR;
 help							return HELP;
 [\\][h]							return HELP;
 [\\][h]+[^\n]*					{invalidCommand(yytext);};

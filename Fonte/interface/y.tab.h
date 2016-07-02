@@ -79,7 +79,9 @@ extern int yydebug;
     MAIOR = 289,
     DIFERENTE = 290,
     MAIOR_IGUAL = 291,
-    MENOR_IGUAL = 292
+    MENOR_IGUAL = 292,
+    COMPARACAO_AND = 293,
+    COMPARACAO_OR = 294
   };
 #endif
 /* Tokens.  */
@@ -118,6 +120,8 @@ extern int yydebug;
 #define DIFERENTE 290
 #define MAIOR_IGUAL 291
 #define MENOR_IGUAL 292
+#define COMPARACAO_AND 293
+#define COMPARACAO_OR 294
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -131,7 +135,7 @@ union YYSTYPE
     int subtok;
     char *strval;
 
-#line 135 "y.tab.h" /* yacc.c:1909  */
+#line 139 "y.tab.h" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
