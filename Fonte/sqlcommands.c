@@ -587,20 +587,177 @@ void insert(rc_insert *s_insert) {
 	freeTable(tabela);
 }
 
+bool ver_equal(char type, char *value_left, char *value_right){
+    int int_Left, int_Right;
+    double double_Left, double_Right;
 
-//////////////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ mexe nessa porra aqui porra do caralho
-void imprime(char nomeTabela[], char nomeColuna[]) {
+    switch(type){
+        case 'D':
+            double_Left = atof(value_left);
+            double_Right = atof(value_right); 
+            return double_Left == double_Right;
+        case 'I':
+            int_Left = atoi(value_left);
+            int_Right = atoi(value_right); 
+            return int_Left == int_Right;
+        case 'S':
+            return strcmp(value_left,value_right) == 0;
+    }
+    return FALSE;
+}
+
+bool ver_less(char type, char *value_left, char *value_right){
+    int int_Left, int_Right;
+    double double_Left, double_Right;
+
+    switch(type){
+        case 'D':
+            double_Left = atof(value_left);
+            double_Right = atof(value_right); 
+            return double_Left < double_Right;
+        case 'I':
+            int_Left = atoi(value_left);
+            int_Right = atoi(value_right); 
+            return int_Left < int_Right;
+        case 'S': 
+            return strcmp(value_left,value_right) < 0;
+    }
+    return FALSE;
+}
+
+bool ver_greater(char type, char *value_left, char *value_right){
+    int int_Left, int_Right;
+    double double_Left, double_Right;
+
+    switch(type){
+        case 'D':
+            double_Left = atof(value_left);
+            double_Right = atof(value_right); 
+            return double_Left > double_Right;
+        case 'I':
+            int_Left = atoi(value_left);
+            int_Right = atoi(value_right); 
+            return int_Left > int_Right;
+        case 'S': 
+            return strcmp(value_left,value_right) > 0;
+    }
+    return FALSE;
+}
+
+bool comparerValues(char type, char *value_left, char *value_right, operation op){
+//    printf("\n%s %c %s\n",value_left, type,value_right);
+    switch(op){
+        case EQ:
+            return ver_equal(type, value_left, value_right);
+        case LT:
+            return ver_less(type, value_left, value_right);
+        case GT:
+            return ver_greater(type, value_left, value_right);
+        case NQ:
+            return !ver_equal(type, value_left, value_right);
+        case LTQ:
+            return ver_equal(type, value_left, value_right) || ver_less(type, value_left, value_right);
+        case GTQ:
+            return ver_equal(type, value_left, value_right) || ver_greater(type, value_left, value_right);
+    }
+    return FALSE;
+}
+
+char ** getStrValue(char * source, char type){
+    char **result;
+    double *d;
+    int *n;
+    result = (char**) malloc(sizeof(char**));
+    *result = (char*) malloc(100);
+    switch(type){
+        case 'D':
+            d = (double *)&source[0];
+            sprintf(*result,"%.8f", *d);
+            break;
+        case 'I':
+            n = (int *)&source[0];
+            sprintf(*result,"%d", *n);
+            break;
+        case 'S':
+            strcpy(*result, source);
+            break;
+    }
+    return result;
+}
+
+bool where_check(rc_select *GLOBAL_SELECT, column *pagina, int start, int nr_campos){
+    rc_where *aux;
+    bool result = TRUE;
+    int j;
+    char *val_left = NULL, *val_right;
+    char type_left = NULL, type_right;
+
+    for(aux = GLOBAL_SELECT->where; aux != NULL; aux = aux->next){
+        if(!result && aux->left_logic == logic_AND)
+            continue;
+
+        if(result && aux->left_logic == logic_OR)
+            continue;
+
+        if(aux->comp->left.type == 'C' || aux->comp->right.type == 'C'){
+            for(j = 0; j < nr_campos; j++){
+	            if(aux->comp->left.type == 'C'){
+	                if(strcmp(aux->comp->left.value, pagina[j+start].nomeCampo) == 0){
+
+                        if(pagina[j+start].tipoCampo == 'C')
+                            type_left = 'S';
+	                    else
+	                        type_left = pagina[j+start].tipoCampo;
+
+                        val_left = *getStrValue(pagina[j+start].valorCampo, type_left);
+	                }
+                }
+	            if(aux->comp->right.type == 'C'){
+	                if(strcmp(aux->comp->right.value, pagina[j+start].nomeCampo) == 0){
+	                   if(pagina[j+start].tipoCampo == 'C')
+	                        type_right = 'S';
+	                    else
+	                        type_right = pagina[j+start].tipoCampo;
+	                    
+	                    val_right = *getStrValue(pagina[j+start].valorCampo, type_right);
+	                }
+	            }
+            }
+        }
+
+        if(aux->comp->left.type != 'C'){            
+            val_left = malloc(sizeof(char)*(strlen(aux->comp->left.value) + 1));
+            strcpy(val_left, aux->comp->left.value);
+            val_left += '\0';
+        }
+        if(aux->comp->right.type != 'C'){            
+            val_right = malloc(sizeof(char)*(strlen(aux->comp->right.value) + 1));
+            strcpy(val_right, aux->comp->right.value);
+            val_right += '\0';
+        }
+        if(val_left == NULL || val_right == NULL){
+            printf("Error object not found\n");
+            return FALSE;
+        }
+
+        if(aux->left_logic == logic_OR)
+            result = result || comparerValues(type_left, val_left, val_right, aux->comp->op);
+        else
+            result = result && comparerValues(type_left, val_left, val_right, aux->comp->op);
+    }
+    return result;
+}
+void imprime(rc_select *GLOBAL_SELECT) {
 
     int j,erro, x, p, cont=0;
     struct fs_objects objeto;
 
-    if(!verificaNomeTabela(nomeTabela)){
-        printf("\nERROR: relation \"%s\" was not found.\n\n\n", nomeTabela);
+    if(!verificaNomeTabela(GLOBAL_SELECT->objName)){
+        printf("\nERROR: relation \"%s\" was not found.\n\n\n", GLOBAL_SELECT->objName);
         return;
     }
-
 	
-    objeto = leObjeto(nomeTabela);
+    objeto = leObjeto(GLOBAL_SELECT->objName);
 
     tp_table *esquema = leSchema(objeto);
 
@@ -623,9 +780,11 @@ void imprime(char nomeTabela[], char nomeColuna[]) {
     for(x = 0; erro == SUCCESS; x++)
         erro = colocaTuplaBuffer(bufferpoll, x, esquema, objeto);
 
+
     int ntuples = --x;
 	p = 0;
 	while (x) {
+
 		column *pagina = getPage(bufferpoll, esquema, objeto, p);
 		if (pagina == ERRO_PARAMETRO) {
 			printf("ERROR: could not open the table.\n");
@@ -636,6 +795,8 @@ void imprime(char nomeTabela[], char nomeColuna[]) {
 
 		if (!cont) {
 			for (j = 0; j < objeto.qtdCampos; j++) {
+                //for na lista comparandp nomeCampo
+
 				if (pagina[j].tipoCampo == 'S')
 					printf(" %-20s ", pagina[j].nomeCampo);
 				else
@@ -645,6 +806,7 @@ void imprime(char nomeTabela[], char nomeColuna[]) {
 			}
 			printf("\n");
 			for (j = 0; j < objeto.qtdCampos; j++) {
+                //for na lista comparandp objeto.nomeCampo
 				printf("%s", (pagina[j].tipoCampo == 'S') ? "----------------------" : "------------");
 				if (j < objeto.qtdCampos - 1)
 					printf("+");
@@ -652,32 +814,42 @@ void imprime(char nomeTabela[], char nomeColuna[]) {
 			printf("\n");
 		}
 		cont++;
-		for (j = 0; j < objeto.qtdCampos*bufferpoll[p].nrec; j++) {
-			if (pagina[j].tipoCampo == 'S')
-				printf(" %-20s ", pagina[j].valorCampo);
-			else if (pagina[j].tipoCampo == 'I') {
-				int *n = (int *)&pagina[j].valorCampo[0];
-				printf(" %-10d ", *n);
-			}
-			else if (pagina[j].tipoCampo == 'C') {
-				printf(" %-10c ", pagina[j].valorCampo[0]);
-			}
-			else if (pagina[j].tipoCampo == 'D') {
-				double *n = (double *)&pagina[j].valorCampo[0];
-				printf(" %-10f ", *n);
-			}
-			if (j >= 1 && ((j + 1) % objeto.qtdCampos) == 0)
-				printf("\n");
-			else
-				printf("|");
-		}
-    	x-=bufferpoll[p++].nrec;
+
+        for (j = 0; j < objeto.qtdCampos * bufferpoll[p].nrec; j++) {
+            if((j % objeto.qtdCampos)==0)
+                if (!where_check(GLOBAL_SELECT, pagina, j, objeto.qtdCampos)){ 
+                    ntuples--; 
+                    j += objeto.qtdCampos - 1;
+                    continue;
+                }  
+
+            // for  na lisa  buscando pagina[j].nomeCampo 
+            if (pagina[j].tipoCampo == 'S')
+                printf(" %-20s ", pagina[j].valorCampo);
+            else if (pagina[j].tipoCampo == 'I') {
+                int *n = (int *)&pagina[j].valorCampo[0];
+                printf(" %-10d ", *n);
+            }
+            else if (pagina[j].tipoCampo == 'C') {
+                printf(" %-10c ", pagina[j].valorCampo[0]);
+            }
+            else if (pagina[j].tipoCampo == 'D') {
+                double *n = (double *)&pagina[j].valorCampo[0];
+                printf(" %-10f ", *n);
+            }             
+            if (j >= 1 && ((j + 1) % objeto.qtdCampos) == 0)
+                printf("\n");
+            else
+                printf("|");           
+        }
+        x-=bufferpoll[p++].nrec;
     }
     printf("\n(%d %s)\n\n",ntuples,(1>=ntuples)?"row": "rows");
 
     free(bufferpoll);
     free(esquema);
 }
+
 /* ----------------------------------------------------------------------------------------------
     Objetivo:   Copia todas as informações menos a tabela do objeto, que será removida.
     Parametros: Objeto que será removido do schema.

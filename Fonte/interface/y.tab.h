@@ -74,14 +74,14 @@ extern int yydebug;
     CLEAR = 284,
     CONTR = 285,
     WHERE = 286,
-    IGUAL = 287,
-    MENOR = 288,
-    MAIOR = 289,
-    DIFERENTE = 290,
-    MAIOR_IGUAL = 291,
-    MENOR_IGUAL = 292,
-    COMPARACAO_AND = 293,
-    COMPARACAO_OR = 294
+    AND = 287,
+    OR = 288,
+    YEQ = 289,
+    YLT = 290,
+    YGT = 291,
+    YNQ = 292,
+    YGTQ = 293,
+    YLTQ = 294
   };
 #endif
 /* Tokens.  */
@@ -114,14 +114,14 @@ extern int yydebug;
 #define CLEAR 284
 #define CONTR 285
 #define WHERE 286
-#define IGUAL 287
-#define MENOR 288
-#define MAIOR 289
-#define DIFERENTE 290
-#define MAIOR_IGUAL 291
-#define MENOR_IGUAL 292
-#define COMPARACAO_AND 293
-#define COMPARACAO_OR 294
+#define AND 287
+#define OR 288
+#define YEQ 289
+#define YLT 290
+#define YGT 291
+#define YNQ 292
+#define YGTQ 293
+#define YLTQ 294
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

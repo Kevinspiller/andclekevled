@@ -36,15 +36,8 @@
 (?i:DROP)						return DROP;
 (?i:CONTRIBUTORS)               return CONTR;
 (?i:WHERE)						return WHERE;
-[=]								return IGUAL;
-[<]								return MENOR;
-[>]								return MAIOR;
-[!]+[=]							return DIFERENTE;
-[<]+[>]							return DIFERENTE;
-[>]+[=]							return MAIOR_IGUAL;
-[<]+[=]							return MENOR_IGUAL;
-[&]+[&]							return COMPARACAO_AND;
-[|]+[|]							return COMPARACAO_OR;
+(?i:AND)						return AND;
+(?i:OR)							return OR;
 help							return HELP;
 [\\][h]							return HELP;
 [\\][h]+[^\n]*					{invalidCommand(yytext);};
@@ -56,10 +49,16 @@ help							return HELP;
 [*]								return *yytext;
 [(]								return *yytext;
 [)]								return *yytext;
+[=]								{yylval.strval = yytext; return YEQ;};
+[>]								{yylval.strval = yytext; return YGT;};
+[<]								{yylval.strval = yytext; return YLT;};
+[<]+[=]							{yylval.strval = yytext; return YLTQ;};
+[>]+[=]							{yylval.strval = yytext; return YGTQ;};
+[\!]+[=]						{yylval.strval = yytext; return YNQ;};
 
 ([a-zA-Z_]+[0-9_]*)+			{yylval.strval = yytext; return OBJECT;};
 [\']([^'])+[\']			  		{yylval.strval = yytext; return ALPHANUM;};
-[0-9]*\.[0-9]*					{yylval.strval = yytext; return VALUE;};
+[0-9]*\.[0-9]+					{yylval.strval = yytext; return VALUE;};
 [0-9]+							{yylval.strval = yytext; return NUMBER;}
 
 \n								{

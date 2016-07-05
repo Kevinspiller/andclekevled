@@ -30,6 +30,10 @@ rc_insert GLOBAL_DATA;
  */
 rc_parser GLOBAL_PARSER;
 
+/********   SELECT *******/
+rc_select GLOBAL_SELECT;
+
+
 void connect(char *nome) {
     int r;
     r = connectDB(nome);
@@ -197,6 +201,9 @@ void clearGlobalStructs() {
     GLOBAL_PARSER.col_count         = 0;
     GLOBAL_PARSER.val_count         = 0;
     GLOBAL_PARSER.step              = 0;
+
+    free(GLOBAL_SELECT.where);
+    GLOBAL_SELECT.where = NULL;
 }
 
 void setMode(char mode) {
@@ -237,7 +244,7 @@ int interface() {
                                 printf("WARNING: Nothing to be inserted. Command ignored.\n");
                             break;
                         case OP_SELECT_ALL:
-                            imprime(GLOBAL_DATA.objName,GLOBAL_DATA.columnName);
+                            imprime(&GLOBAL_SELECT);
                             break;
                         case OP_CREATE_TABLE:
                             createTable(&GLOBAL_DATA);
@@ -309,4 +316,81 @@ void yyerror(char *s, ...) {
     vfprintf(stderr, s, ap);
     fprintf(stderr, "\n");
     */
+}
+
+/********* select *******/
+
+void setColumnProjection(char **name) {
+    GLOBAL_SELECT.columnName = realloc(GLOBAL_SELECT.columnName, (GLOBAL_SELECT.nColumn + 1)*sizeof(char *));
+    GLOBAL_SELECT.columnName[GLOBAL_SELECT.nColumn] = malloc(sizeof(char)*(strlen(*name) + 1));
+    strcpylower(GLOBAL_SELECT.columnName[GLOBAL_SELECT.nColumn], *name);
+    GLOBAL_SELECT.columnName[GLOBAL_SELECT.nColumn][strlen(*name)] = '\0';
+    GLOBAL_SELECT.nColumn++;
+}
+
+/********** where ********/
+void setWhere(op_logic logic){
+    rc_where * new, *loop;
+
+    new = (rc_where*)malloc(sizeof(rc_where));
+    new->next = NULL;
+
+    if(GLOBAL_SELECT.where == NULL)
+        GLOBAL_SELECT.where = new;
+    else{
+        for(loop = GLOBAL_SELECT.where; loop->next != NULL; loop = loop->next);
+
+        loop->next = new;
+    }
+
+    new->left_logic = logic;
+
+}
+
+void setCompWhereLeft(char **op_left, char type){ 
+    rc_where * aux;
+    bool isString = type == 'S';
+
+    for(aux = GLOBAL_SELECT.where; aux->next != NULL; aux = aux->next);
+
+    aux->comp = (rc_where_comp*)malloc(sizeof(rc_where_comp)); 
+    aux->comp->left.value = malloc(sizeof(char)*(strlen(*op_left) + 1));
+    strcpy(aux->comp->left.value, &(*op_left)[isString ? 1 : 0 ]);
+    if(isString)
+        aux->comp->left.value[strlen(*op_left)-2] = '\0';
+    else    
+        aux->comp->left.value += '\0';
+    aux->comp->left.type = type;
+}
+
+void setCompWhereOp(operation op){ 
+    rc_where * aux;
+
+    for(aux = GLOBAL_SELECT.where; aux->next != NULL; aux = aux->next);
+
+    aux->comp->op = op;
+}
+
+void setCompWhereRight(char **op_left, char type){ 
+    rc_where * aux;
+    bool isString = type == 'S';
+
+    for(aux = GLOBAL_SELECT.where; aux->next != NULL; aux = aux->next);
+
+    aux->comp->right.value = malloc(sizeof(char)*(strlen(*op_left) + 1));
+    strcpy(aux->comp->right.value, &(*op_left)[isString ? 1 : 0 ]);
+    if(isString)
+        aux->comp->right.value[strlen(*op_left)-2] = '\0';
+    else    
+        aux->comp->right.value += '\0';
+    aux->comp->right.type = type;
+}
+
+void setObjNameSelect(char **name) {
+    if (GLOBAL_PARSER.mode == 0)
+        return;
+    GLOBAL_SELECT.objName = malloc(sizeof(char)*((strlen(*name)+1)));
+    strcpylower(GLOBAL_SELECT.objName, *name);
+    GLOBAL_SELECT.objName[strlen(*name)] = '\0';
+    GLOBAL_PARSER.step++;
 }

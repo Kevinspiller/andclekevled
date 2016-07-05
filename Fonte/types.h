@@ -1,5 +1,9 @@
 #define FTYPES 1 // flag para identificar se types.h já foi incluída
 
+typedef enum { NONE, logic_AND, logic_OR} op_logic;
+typedef enum { FALSE, TRUE} bool;
+typedef enum { EQ, LT, GT, NQ, LTQ, GTQ} operation;
+
 struct fs_objects { // Estrutura usada para carregar fs_objects.dat
     char nome[TAMANHO_NOME_TABELA];     //  Nome da tabela.
     int cod;                            // Código da tabela.
@@ -84,10 +88,35 @@ union c_int{
     char cnum[sizeof(int)];
 };
 
-/************************************************************************************************
-**************************************  VARIAVEIS GLOBAIS  **************************************/
+
+/***** WHERE ********/
+
+typedef struct operating{   //estrutura para dados de uma condição do where
+    char *value;            //valor ou nome da coluna do operando
+    char type;             // tipo do operando
+}operating;
+
+typedef struct rc_where_comp {     //Estrutura auxiliar das condições do where  
+    operating left;               //Coluna ou valor do compo de teste do lado esquedo do teste 
+    operation op;                  //operacao entre os operadores (=,!,<,>) 
+    operating right;              //Coluna ou valor do compo de teste do lado esquedo do teste
+}rc_where_comp;
+
+typedef struct rc_where{    //estrutura do comando where
+    rc_where_comp *comp;    //lista de comparaçoes
+    struct rc_where *next;         //proxima comparação do where
+    op_logic left_logic;    //operação logica com a clausala anterior, no primeiro sera "NONE"
+}rc_where;
+
+/***** SELECT ********/
+typedef struct rc_select{ // estrutura das colunas das projeções do select
+    char *objName;          //Nome da tabela do select
+    char **columnName; // lista de colunas
+    int nColumn;         // numero de colunas
+    rc_where *where;
+}rc_select;
+
 
 extern db_connected connected;
-
 /************************************************************************************************
  ************************************************************************************************/

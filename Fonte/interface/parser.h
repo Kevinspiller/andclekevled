@@ -21,6 +21,10 @@ extern rc_insert GLOBAL_DATA;
  */
 extern rc_parser GLOBAL_PARSER;
 
+/********	SELECT *******/
+extern rc_select GLOBAL_SELECT;
+
+
 /* Funcções do yacc
  */
 int yyparse();
@@ -103,3 +107,13 @@ void clearGlobalStructs();
  * dos tokens iniciais.
  */
 void setMode(char mode);
+
+/*select*/
+void setColumnProjection(char **name);
+
+/*where*/
+void setObjNameSelect(char **name);
+void setWhere(op_logic logic);
+void setCompWhereLeft(char **op_left, char type);
+void setCompWhereOp(operation op);
+void setCompWhereRight(char **op_left, char type);

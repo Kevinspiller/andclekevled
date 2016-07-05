@@ -53,9 +53,9 @@ int yywrap() {
         CHAR             PRIMARY         KEY         REFERENCES  DATABASE
         DROP             OBJECT          NUMBER      VALUE       QUIT
         LIST_TABLES      LIST_TABLE      ALPHANUM    CONNECT     HELP
-        LIST_DBASES      CLEAR           CONTR       WHERE       IGUAL
-        MENOR            MAIOR           DIFERENTE   MAIOR_IGUAL MENOR_IGUAL
-        COMPARACAO_AND   COMPARACAO_OR;
+        LIST_DBASES      CLEAR           CONTR       WHERE 		 AND
+        OR               YEQ             YLT         YGT         YNQ 
+        YGTQ             YLTQ;
 
 /*============================================================================*/
 
@@ -183,7 +183,8 @@ drop_database: DROP DATABASE {setMode(OP_DROP_DATABASE);} OBJECT {setObjName(yyt
 
 select: SELECT {setMode(OP_SELECT_ALL);} columns_list FROM table_select condition_where semicolon {return 0;};
 
-table_select: OBJECT {setObjName(yytext);};
+
+table_select: OBJECT {setObjNameSelect(yytext);};
 
 columns_list: '*' | projection | projection ',' columns_list;
 
@@ -192,13 +193,20 @@ projection: OBJECT {setColumnProjection(yytext);};
 
 /* WHERE */
 
-condition_where: /*optional*/ | WHERE column_test condition valor;
+condition_where: /*optional*/ | WHERE {setWhere(NONE);} clause;
 
-condition: IGUAL | MENOR | MAIOR | DIFERENTE | MAIOR_IGUAL | MENOR_IGUAL | COMPARACAO_AND | COMPARACAO_OR;
+clause: condition | clause OR {setWhere(logic_OR);} condition | clause AND {setWhere(logic_AND);} condition;
 
-column_test: OBJECT {setColumnTest(yytext);};
+condition: operatingL YEQ {setCompWhereOp(EQ);} operatingR 
+|           operatingL YLT {setCompWhereOp(LT);} operatingR     
+|           operatingL YGT {setCompWhereOp(GT);} operatingR        
+|           operatingL YNQ {setCompWhereOp(NQ);} operatingR
+|           operatingL YGTQ {setCompWhereOp(GTQ);} operatingR
+|           operatingL YLTQ {setCompWhereOp(LTQ);} operatingR;
 
-valor: OBJECT {setValor(yytext);};
+operatingL: OBJECT {setCompWhereLeft(yytext, 'C');} | VALUE {setCompWhereLeft(yytext, 'D');} | NUMBER {setCompWhereLeft(yytext, 'I');} | ALPHANUM {setCompWhereLeft(yytext, 'S');};
+
+operatingR: OBJECT {setCompWhereRight(yytext, 'C');} | VALUE {setCompWhereRight(yytext, 'D');} | NUMBER {setCompWhereRight(yytext, 'I');} | ALPHANUM {setCompWhereRight(yytext, 'S');};
 
 /* END */
 %%
