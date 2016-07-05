@@ -307,18 +307,18 @@ int interface() {
 
 void yyerror(char *s, ...) {
     GLOBAL_PARSER.noerror = 0;
-    /*extern yylineno;
-
-    va_list ap;
-    va_start(ap, s);
-
-    fprintf(stderr, "%d: error: ", yylineno);
-    vfprintf(stderr, s, ap);
-    fprintf(stderr, "\n");
-    */
-}
+ }
 
 /********* select *******/
+
+ void setObjNameSelect(char **name) {
+    if (GLOBAL_PARSER.mode == 0)
+        return;
+    GLOBAL_SELECT.objName = malloc(sizeof(char)*((strlen(*name)+1)));
+    strcpylower(GLOBAL_SELECT.objName, *name);
+    GLOBAL_SELECT.objName[strlen(*name)] = '\0';
+    GLOBAL_PARSER.step++;
+}
 
 void setColumnProjection(char **name) {
     GLOBAL_SELECT.columnName = realloc(GLOBAL_SELECT.columnName, (GLOBAL_SELECT.nColumn + 1)*sizeof(char *));
@@ -329,6 +329,15 @@ void setColumnProjection(char **name) {
 }
 
 /********** where ********/
+
+/* ----------------------------------------------------------------------------------------------
+    setWhere: Cria uma nova condição where na lista.
+              Caso for a primeira condição where ele aloca o nodo no inicio da lista
+              se não ele percorre a lista até o final e aloca um novo nodo no final da lista.
+              Se for a primeira condição ele aloca o nodo com a condição logica NONE se não
+              ele aloca com a operação que o usuario digitar podendo ser AND ou OR que é passado
+              como parametro pelo yacc.y.
+------------------------------------------------------------------------------------------------*/
 void setWhere(op_logic logic){
     rc_where * new, *loop;
 
@@ -345,7 +354,12 @@ void setWhere(op_logic logic){
 
     new->left_logic = logic;
 }
-
+/* -----------------------------------------------------------------------------------------------------------
+    setCompWhereLeft: Aloca um novo nodo com valores e tipo das condições do where.
+                      Pega como parametro o que o usuario digitou a esquerda da condição 
+                      e guarda no nodo juntamente com o tipo (Coluna, String, Valor inteiro ou Valor quebrado)
+                      que é passado como parametro. 
+-------------------------------------------------------------------------------------------------------------*/
 void setCompWhereLeft(char **op_left, char type){ 
     rc_where * aux;
     bool isString = type == 'S';
@@ -354,14 +368,16 @@ void setCompWhereLeft(char **op_left, char type){
 
     aux->comp = (rc_where_comp*)malloc(sizeof(rc_where_comp)); 
     aux->comp->left.value = malloc(sizeof(char)*(strlen(*op_left) + 1));
-    strcpy(aux->comp->left.value, &(*op_left)[isString ? 1 : 0 ]);
-    if(isString)
-        aux->comp->left.value[strlen(*op_left)-2] = '\0';
+    strcpy(aux->comp->left.value, &(*op_left)[isString ? 1 : 0 ]); // verifica se é uma string e ja copia para o value
+    if(isString) 
+        aux->comp->left.value[strlen(*op_left)-2] = '\0'; // tratamento de '' nas strings
     else    
         aux->comp->left.value += '\0';
     aux->comp->left.type = type;
 }
-
+/* ----------------------------------------------------------------------------------
+    setCompWhereOp: recebe o tipo da operação que o usuario digitou e guarda no nodo
+------------------------------------------------------------------------------------*/
 void setCompWhereOp(operation op){ 
     rc_where * aux;
 
@@ -369,7 +385,12 @@ void setCompWhereOp(operation op){
 
     aux->comp->op = op;
 }
-
+/* -----------------------------------------------------------------------------------------------------------
+    setCompWhereRight: Aloca um novo nodo com valores e tipo das condições do where.
+                      Pega como parametro o que o usuario digitou a direita da condição 
+                      e guarda no nodo juntamente com o tipo (Coluna, String, Valor inteiro ou Valor quebrado)
+                      que é passado como parametro. 
+-------------------------------------------------------------------------------------------------------------*/
 void setCompWhereRight(char **op_left, char type){ 
     rc_where * aux;
     bool isString = type == 'S';
@@ -377,32 +398,20 @@ void setCompWhereRight(char **op_left, char type){
     for(aux = GLOBAL_SELECT.where; aux->next != NULL; aux = aux->next);
 
     aux->comp->right.value = malloc(sizeof(char)*(strlen(*op_left) + 1));
-    strcpy(aux->comp->right.value, &(*op_left)[isString ? 1 : 0 ]); // tratamento de '' nas strings
+    strcpy(aux->comp->right.value, &(*op_left)[isString ? 1 : 0 ]); // verifica se é uma string e ja copia para o value
     if(isString)
-        aux->comp->right.value[strlen(*op_left)-2] = '\0';
+        aux->comp->right.value[strlen(*op_left)-2] = '\0'; // tratamento de '' nas strings
     else    
         aux->comp->right.value += '\0';
     aux->comp->right.type = type;
 }
-
-void setObjNameSelect(char **name) {
-    if (GLOBAL_PARSER.mode == 0)
-        return;
-    GLOBAL_SELECT.objName = malloc(sizeof(char)*((strlen(*name)+1)));
-    strcpylower(GLOBAL_SELECT.objName, *name);
-    GLOBAL_SELECT.objName[strlen(*name)] = '\0';
-    GLOBAL_PARSER.step++;
-}
-
-// resetar os ponteiros para a projeção
+/*------------------------------------------------
+resetSelect: resetar os ponteiros para a projeção
+-------------------------------------------------*/
 void resetSelect(){
     free(GLOBAL_SELECT.objName);
     GLOBAL_SELECT.objName = NULL;
     free(GLOBAL_SELECT.columnName);
     GLOBAL_SELECT.columnName = NULL;
     GLOBAL_SELECT.nColumn = 0;
-   
-    //free(GLOBAL_SELECT.where);
-   // GLOBAL_SELECT.where = NULL;
-   // GLOBAL_SELECT.nWhere = 0;    
 }

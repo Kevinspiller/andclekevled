@@ -581,12 +581,15 @@ void insert(rc_insert *s_insert) {
 		if (finalizaInsert(s_insert->objName, colunas) == SUCCESS)
 			printf("INSERT 0 1\n");
 
-	//freeTp_table(&esquema, objeto.qtdCampos);
 	free(esquema);
 	freeColumn(colunas);
 	freeTable(tabela);
 }
-
+/*---------------------------------------------------------------------------------------------------------------------------
+	ver_equal: recebe o tipo das variaveis para o qual deve ser convertido, a variavel presente na coluna da tabela do banco
+			   e a que o usuario digitou, faz a conversão e após a comparação de igualdade entre as duas, 
+			   retornando TRUE se forem iguais ou FALSE se forem diferentes. 
+----------------------------------------------------------------------------------------------------------------------------*/
 bool ver_equal(char type, char *value_left, char *value_right){
     int int_Left, int_Right;
     double double_Left, double_Right;
@@ -605,7 +608,12 @@ bool ver_equal(char type, char *value_left, char *value_right){
     }
     return FALSE;
 }
-
+/*-------------------------------------------------------------------------------------------------------------------------
+	ver_less: recebe o tipo das variaveis para o qual deve ser convertido, a variavel presente na coluna da tabela do banco
+			   e a que o usuario digitou, faz a conversão e após a comparação se o valor da variavel presente
+			   no na coluna do banco é menor do que o valor da variavel que o usuario digitou, 
+			   retornando TRUE se for menor ou FALSE se não for. 
+--------------------------------------------------------------------------------------------------------------------------*/
 bool ver_less(char type, char *value_left, char *value_right){
     int int_Left, int_Right;
     double double_Left, double_Right;
@@ -624,7 +632,12 @@ bool ver_less(char type, char *value_left, char *value_right){
     }
     return FALSE;
 }
-
+/*----------------------------------------------------------------------------------------------------------------------------
+	ver_greater: recebe o tipo das variaveis para o qual deve ser convertido, a variavel presente na coluna da tabela do banco
+			   e a que o usuario digitou, faz a conversão e após a comparação se o valor da variavel presente
+			   no na coluna do banco é maior do que o valor da variavel que o usuario digitou, 
+			   retornando TRUE se for maior ou FALSE se não for. 
+-----------------------------------------------------------------------------------------------------------------------------*/
 bool ver_greater(char type, char *value_left, char *value_right){
     int int_Left, int_Right;
     double double_Left, double_Right;
@@ -643,7 +656,10 @@ bool ver_greater(char type, char *value_left, char *value_right){
     }
     return FALSE;
 }
-
+/* -----------------------------------------------------------------------------------------------------------------
+	comparerValues: recebe o tipo das variaveis para o qual deve ser convertido, o valor presente na coluna do banco,
+					o valor que o usuario digitou e a operação que deve ser feita.
+-------------------------------------------------------------------------------------------------------------------*/
 bool comparerValues(char type, char *value_left, char *value_right, operation op){
     switch(op){
         case EQ:
@@ -653,15 +669,17 @@ bool comparerValues(char type, char *value_left, char *value_right, operation op
         case GT:
             return ver_greater(type, value_left, value_right);
         case NQ:
-            return !ver_equal(type, value_left, value_right);
+            return !ver_equal(type, value_left, value_right); // diferente
         case LTQ:
-            return ver_equal(type, value_left, value_right) || ver_less(type, value_left, value_right);
+            return ver_equal(type, value_left, value_right) || ver_less(type, value_left, value_right); // menor ou igual
         case GTQ:
-            return ver_equal(type, value_left, value_right) || ver_greater(type, value_left, value_right);
+            return ver_equal(type, value_left, value_right) || ver_greater(type, value_left, value_right); // maior ou igual
     }
     return FALSE;
 }
-
+/* -----------------------------------------------------------------------------------------------------------------
+	getStrValue: 
+-------------------------------------------------------------------------------------------------------------------*/
 char ** getStrValue(char * source, char type){
     char **result;
     double *d;
@@ -683,7 +701,9 @@ char ** getStrValue(char * source, char type){
     }
     return result;
 }
-
+/* -----------------------------------------------------------------------------------------------------------------
+	where_check: 
+-------------------------------------------------------------------------------------------------------------------*/
 bool where_check(rc_select *GLOBAL_SELECT, column *pagina, int start, int nr_campos){
     rc_where *aux;
     bool result = TRUE;
@@ -746,6 +766,7 @@ bool where_check(rc_select *GLOBAL_SELECT, column *pagina, int start, int nr_cam
     }
     return result;
 }
+
 void imprime(rc_select *GLOBAL_SELECT) {
     int j,erro, x, p, cont=0;
     struct fs_objects objeto;
@@ -794,7 +815,6 @@ void imprime(rc_select *GLOBAL_SELECT) {
 		if (!cont) {
             int checkRun;
 			for (j = 0; j < objeto.qtdCampos; j++) {
-                //for na lista comparandp nomeCampo
                 if(GLOBAL_SELECT->nColumn > 0) {
                     for(checkRun = 0; checkRun < GLOBAL_SELECT->nColumn;checkRun++) {
                         if(strcmp(GLOBAL_SELECT->columnName[checkRun],pagina[j].nomeCampo)==0) {
@@ -819,14 +839,12 @@ void imprime(rc_select *GLOBAL_SELECT) {
 			printf("\n");
             if(GLOBAL_SELECT->nColumn > 0) {
                 for (j = 0; j < GLOBAL_SELECT->nColumn; j++) {
-                //for na lista comparandp objeto.nomeCampo
                 printf("%s", (pagina[j].tipoCampo == 'S') ? "----------------------" : "------------");
                 if (j < GLOBAL_SELECT->nColumn - 1)
                     printf("+");
                 }
             }else{
                 for (j = 0; j < objeto.qtdCampos; j++) {
-                //for na lista comparandp objeto.nomeCampo
                 printf("%s", (pagina[j].tipoCampo == 'S') ? "----------------------" : "------------");
                 if (j < objeto.qtdCampos - 1)
                     printf("+");
@@ -853,7 +871,7 @@ void imprime(rc_select *GLOBAL_SELECT) {
             }    
                 if(GLOBAL_SELECT->nColumn > 0) {
                     if(state == 1) {
-                                // for  na lisa  buscando pagina[j].nomeCampo 
+                                
                             if (pagina[j].tipoCampo == 'S')
                                 printf(" %-20s ", pagina[j].valorCampo);
                             else if (pagina[j].tipoCampo == 'I') {
@@ -867,13 +885,8 @@ void imprime(rc_select *GLOBAL_SELECT) {
                                 double *n = (double *)&pagina[j].valorCampo[0];
                                 printf(" %-10f ", *n);
                             }            
-                              //if (j >= 1 && ((j + 1) % GLOBAL_SELECT->nColumn) == 0)
-                                       // printf("\n");
-                                    //else
-                                       // printf("|");
                     }
                 }else{
-                            // for  na lisa  buscando pagina[j].nomeCampo 
                             if (pagina[j].tipoCampo == 'S')
                                 printf(" %-20s ", pagina[j].valorCampo);
                             else if (pagina[j].tipoCampo == 'I') {
@@ -887,16 +900,10 @@ void imprime(rc_select *GLOBAL_SELECT) {
                                 double *n = (double *)&pagina[j].valorCampo[0];
                                 printf(" %-10f ", *n);
                             }             
-                          //  if (j >= 1 && ((j + 1) % objeto.qtdCampos) == 0)
-                              //  printf("\n");
-                           // else
-                               // printf("|");
                 }
                 if (j >= 1 && ((j + 1) % objeto.qtdCampos) == 0)
                                 printf("\n");
-                           // else
-                                //printf("|");
-                               
+                              
         }
         x-=bufferpoll[p++].nrec;
     }

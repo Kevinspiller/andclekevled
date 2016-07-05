@@ -1,11 +1,21 @@
-# andclekevledmar
+UNIVERSIDADE FEDERAL DA FRONTEIRA SUL - UFFS
+Campus: Chapecó - SC
+Curso: Ciência da Computação
+Componente Curricular: Banco de dados II
+Professor: Dr. Denio Duarte
+Acadêmicos: André Luiz Hofer (1411100009), Cleiton A. Ambrosini (1411100039), Kevin M. Spiller (1211100049) e Marcelo Acordi (1411100007)
+Projeto: UFFSDB
+Link GitHub: https://github.com/Kevinspiller/andclekevledmar
+ 
+
+
 
   O arquivo log-erros.txt, é o report gerado pelo Valgrind, quanto aos vazamentos de memória.
 
 1) (NÃO CORRIGIDO) Vazamento de memória causado pela linha 403 da função leSchema do arquivo dictonary.c.
 Linha 403:   tp_table *esquema = (tp_table *)malloc(sizeof(tp_table)*(objeto.qtdCampos+1));
 Funções envolvidas em ordem de chamada pelo programa, com as linhas correspondentes:
-:insert, arquivo:sqlcommands.c:579  
+:insert, arquivo:sqlcommands.c:579 
 :finalizaInsert,arquivo:sqlcommands.c:341
 :abretabela,arquivo:sqlcommands.c:32
 :leSchema,arquivo:dictionary.c:403 -> onde ocorre o vazamento de memória.
