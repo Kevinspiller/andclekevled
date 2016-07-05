@@ -48,6 +48,7 @@ int yywrap() {
 
 /* precisa adicionar o que ele quer que pega o token aqui nessa parte e no arquivo lex.l tbm*/
 
+<<<<<<< HEAD
 %token  INSERT           INTO            VALUES      SELECT      FROM
         CREATE           TABLE           INTEGER     VARCHAR     DOUBLE
         CHAR             PRIMARY         KEY         REFERENCES  DATABASE
@@ -56,6 +57,16 @@ int yywrap() {
         LIST_DBASES      CLEAR           CONTR       WHERE 		 AND
         OR               YEQ             YLT         YGT         YNQ 
         YGTQ             YLTQ;
+=======
+%token  INSERT           INTO             VALUES        SELECT        FROM
+        CREATE           TABLE            INTEGER       VARCHAR       DOUBLE
+        CHAR             PRIMARY          KEY           REFERENCES    DATABASE
+        DROP             OBJECT           NUMBER        VALUE         QUIT
+        LIST_TABLES      LIST_TABLE       ALPHANUM      CONNECT       HELP
+        LIST_DBASES      CLEAR            CONTR         WHERE         IGUAL
+        MENOR            MAIOR            DIFERENTE     MAIOR_IGUAL   MENOR_IGUAL
+        COMPARACAO_AND   COMPARACAO_OR;
+>>>>>>> origin/master
 
 /*============================================================================*/
 
@@ -206,7 +217,11 @@ condition: operatingL YEQ {setCompWhereOp(EQ);} operatingR
 
 operatingL: OBJECT {setCompWhereLeft(yytext, 'C');} | VALUE {setCompWhereLeft(yytext, 'D');} | NUMBER {setCompWhereLeft(yytext, 'I');} | ALPHANUM {setCompWhereLeft(yytext, 'S');};
 
+<<<<<<< HEAD
 operatingR: OBJECT {setCompWhereRight(yytext, 'C');} | VALUE {setCompWhereRight(yytext, 'D');} | NUMBER {setCompWhereRight(yytext, 'I');} | ALPHANUM {setCompWhereRight(yytext, 'S');};
+=======
+valor: ALPHANUM {addTypeValue(ALPHANUM_TYPE);addValueTest(*yytext);}|VALUE {addTypeValue(NUMBER_TYPE);addValueTest(*yytext);}|NUMBER{addTypeValue(INT_TYPE);addValueTest(*yytext);};
+>>>>>>> origin/master
 
 /* END */
 %%

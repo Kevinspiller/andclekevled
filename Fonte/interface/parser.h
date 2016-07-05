@@ -108,6 +108,7 @@ void clearGlobalStructs();
  */
 void setMode(char mode);
 
+<<<<<<< HEAD
 /*select*/
 void setColumnProjection(char **name);
 
@@ -117,3 +118,12 @@ void setWhere(op_logic logic);
 void setCompWhereLeft(char **op_left, char type);
 void setCompWhereOp(operation op);
 void setCompWhereRight(char **op_left, char type);
+=======
+void addTypeValue (int type);
+
+void addValueTest (char *value);
+
+void setColumnProjection (char **name);
+
+void setColumnTest (char **name);
+>>>>>>> origin/master
