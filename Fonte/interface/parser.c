@@ -393,3 +393,16 @@ void setObjNameSelect(char **name) {
     GLOBAL_SELECT.objName[strlen(*name)] = '\0';
     GLOBAL_PARSER.step++;
 }
+
+// resetar os ponteiros para a projeção
+void resetSelect(){
+    free(GLOBAL_SELECT.objName);
+    GLOBAL_SELECT.objName = NULL;
+    free(GLOBAL_SELECT.columnName);
+    GLOBAL_SELECT.columnName = NULL;
+    GLOBAL_SELECT.nColumn = 0;
+   
+    //free(GLOBAL_SELECT.where);
+   // GLOBAL_SELECT.where = NULL;
+   // GLOBAL_SELECT.nWhere = 0;    
+}

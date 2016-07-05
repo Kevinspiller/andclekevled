@@ -1695,7 +1695,7 @@ yyreduce:
 
   case 70:
 #line 184 "yacc.y" /* yacc.c:1646  */
-    {setMode(OP_SELECT_ALL);}
+    {setMode(OP_SELECT_ALL); resetSelect();}
 #line 1700 "y.tab.c" /* yacc.c:1646  */
     break;
 

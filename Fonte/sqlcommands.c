@@ -645,7 +645,6 @@ bool ver_greater(char type, char *value_left, char *value_right){
 }
 
 bool comparerValues(char type, char *value_left, char *value_right, operation op){
-//    printf("\n%s %c %s\n",value_left, type,value_right);
     switch(op){
         case EQ:
             return ver_equal(type, value_left, value_right);

@@ -117,3 +117,4 @@ void setWhere(op_logic logic);
 void setCompWhereLeft(char **op_left, char type);
 void setCompWhereOp(operation op);
 void setCompWhereRight(char **op_left, char type);
+void resetSelect();

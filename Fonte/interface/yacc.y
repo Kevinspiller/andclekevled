@@ -181,7 +181,7 @@ drop_database: DROP DATABASE {setMode(OP_DROP_DATABASE);} OBJECT {setObjName(yyt
 
 /* SELECT */
 
-select: SELECT {setMode(OP_SELECT_ALL);} columns_list FROM table_select condition_where semicolon {return 0;};
+select: SELECT {setMode(OP_SELECT_ALL); resetSelect();} columns_list FROM table_select condition_where semicolon {return 0;};
 
 
 table_select: OBJECT {setObjNameSelect(yytext);};
