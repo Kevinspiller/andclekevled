@@ -690,7 +690,7 @@ bool where_check(rc_select *GLOBAL_SELECT, column *pagina, int start, int nr_cam
     bool result = TRUE;
     int j;
     char *val_left = NULL, *val_right;
-    char type_left = NULL, type_right;
+    char type_left, type_right;
 
     for(aux = GLOBAL_SELECT->where; aux != NULL; aux = aux->next){
         if(!result && aux->left_logic == logic_AND)
@@ -748,7 +748,6 @@ bool where_check(rc_select *GLOBAL_SELECT, column *pagina, int start, int nr_cam
     return result;
 }
 void imprime(rc_select *GLOBAL_SELECT) {
-
     int j,erro, x, p, cont=0;
     struct fs_objects objeto;
 
@@ -794,53 +793,111 @@ void imprime(rc_select *GLOBAL_SELECT) {
 		}
 
 		if (!cont) {
+            int checkRun;
 			for (j = 0; j < objeto.qtdCampos; j++) {
                 //for na lista comparandp nomeCampo
-
-				if (pagina[j].tipoCampo == 'S')
-					printf(" %-20s ", pagina[j].nomeCampo);
-				else
-					printf(" %-10s ", pagina[j].nomeCampo);
-				if (j < objeto.qtdCampos - 1)
-					printf("|");
+                if(GLOBAL_SELECT->nColumn > 0) {
+                    for(checkRun = 0; checkRun < GLOBAL_SELECT->nColumn;checkRun++) {
+                        if(strcmp(GLOBAL_SELECT->columnName[checkRun],pagina[j].nomeCampo)==0) {
+                                  if (pagina[j].tipoCampo == 'S')
+                                    printf(" %-20s ", pagina[j].nomeCampo);
+                                  else
+                                    printf(" %-10s ", pagina[j].nomeCampo);
+                                if (j < objeto.qtdCampos - 1)
+                                    printf("|");
+                        }
+                    }
+                }else{
+                            if (pagina[j].tipoCampo == 'S')
+                                printf(" %-20s ", pagina[j].nomeCampo);
+                            else
+                                printf(" %-10s ", pagina[j].nomeCampo);
+                            if (j < objeto.qtdCampos - 1)
+                                printf("|");
+                }
+				
 			}
 			printf("\n");
-			for (j = 0; j < objeto.qtdCampos; j++) {
+            if(GLOBAL_SELECT->nColumn > 0) {
+                for (j = 0; j < GLOBAL_SELECT->nColumn; j++) {
                 //for na lista comparandp objeto.nomeCampo
-				printf("%s", (pagina[j].tipoCampo == 'S') ? "----------------------" : "------------");
-				if (j < objeto.qtdCampos - 1)
-					printf("+");
-			}
+                printf("%s", (pagina[j].tipoCampo == 'S') ? "----------------------" : "------------");
+                if (j < GLOBAL_SELECT->nColumn - 1)
+                    printf("+");
+                }
+            }else{
+                for (j = 0; j < objeto.qtdCampos; j++) {
+                //for na lista comparandp objeto.nomeCampo
+                printf("%s", (pagina[j].tipoCampo == 'S') ? "----------------------" : "------------");
+                if (j < objeto.qtdCampos - 1)
+                    printf("+");
+                }    
+            }
+			
 			printf("\n");
 		}
 		cont++;
-
+        
+        int checkRunTwo,state;
         for (j = 0; j < objeto.qtdCampos * bufferpoll[p].nrec; j++) {
+            state = 0;
             if((j % objeto.qtdCampos)==0)
                 if (!where_check(GLOBAL_SELECT, pagina, j, objeto.qtdCampos)){ 
                     ntuples--; 
                     j += objeto.qtdCampos - 1;
                     continue;
                 }  
-
-            // for  na lisa  buscando pagina[j].nomeCampo 
-            if (pagina[j].tipoCampo == 'S')
-                printf(" %-20s ", pagina[j].valorCampo);
-            else if (pagina[j].tipoCampo == 'I') {
-                int *n = (int *)&pagina[j].valorCampo[0];
-                printf(" %-10d ", *n);
-            }
-            else if (pagina[j].tipoCampo == 'C') {
-                printf(" %-10c ", pagina[j].valorCampo[0]);
-            }
-            else if (pagina[j].tipoCampo == 'D') {
-                double *n = (double *)&pagina[j].valorCampo[0];
-                printf(" %-10f ", *n);
-            }             
-            if (j >= 1 && ((j + 1) % objeto.qtdCampos) == 0)
-                printf("\n");
-            else
-                printf("|");           
+            for(checkRunTwo = 0; checkRunTwo < GLOBAL_SELECT->nColumn;checkRunTwo++) {
+                    if(strcmp(GLOBAL_SELECT->columnName[checkRunTwo],pagina[j].nomeCampo)==0) {
+                        state = 1;
+                    }
+            }    
+                if(GLOBAL_SELECT->nColumn > 0) {
+                    if(state == 1) {
+                                // for  na lisa  buscando pagina[j].nomeCampo 
+                            if (pagina[j].tipoCampo == 'S')
+                                printf(" %-20s ", pagina[j].valorCampo);
+                            else if (pagina[j].tipoCampo == 'I') {
+                                int *n = (int *)&pagina[j].valorCampo[0];
+                                printf(" %-10d ", *n);
+                            }
+                            else if (pagina[j].tipoCampo == 'C') {
+                                printf(" %-10c ", pagina[j].valorCampo[0]);
+                            }
+                            else if (pagina[j].tipoCampo == 'D') {
+                                double *n = (double *)&pagina[j].valorCampo[0];
+                                printf(" %-10f ", *n);
+                            }            
+                              //if (j >= 1 && ((j + 1) % GLOBAL_SELECT->nColumn) == 0)
+                                       // printf("\n");
+                                    //else
+                                       // printf("|");
+                    }
+                }else{
+                            // for  na lisa  buscando pagina[j].nomeCampo 
+                            if (pagina[j].tipoCampo == 'S')
+                                printf(" %-20s ", pagina[j].valorCampo);
+                            else if (pagina[j].tipoCampo == 'I') {
+                                int *n = (int *)&pagina[j].valorCampo[0];
+                                printf(" %-10d ", *n);
+                            }
+                            else if (pagina[j].tipoCampo == 'C') {
+                                printf(" %-10c ", pagina[j].valorCampo[0]);
+                            }
+                            else if (pagina[j].tipoCampo == 'D') {
+                                double *n = (double *)&pagina[j].valorCampo[0];
+                                printf(" %-10f ", *n);
+                            }             
+                          //  if (j >= 1 && ((j + 1) % objeto.qtdCampos) == 0)
+                              //  printf("\n");
+                           // else
+                               // printf("|");
+                }
+                if (j >= 1 && ((j + 1) % objeto.qtdCampos) == 0)
+                                printf("\n");
+                           // else
+                                //printf("|");
+                               
         }
         x-=bufferpoll[p++].nrec;
     }
@@ -849,7 +906,6 @@ void imprime(rc_select *GLOBAL_SELECT) {
     free(bufferpoll);
     free(esquema);
 }
-
 /* ----------------------------------------------------------------------------------------------
     Objetivo:   Copia todas as informações menos a tabela do objeto, que será removida.
     Parametros: Objeto que será removido do schema.

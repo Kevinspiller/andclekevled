@@ -1,3 +1,5 @@
 prog
 *.dat
 *.o
+*.l
+Fonte/interface/lex.l

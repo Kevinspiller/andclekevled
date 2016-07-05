@@ -344,7 +344,6 @@ void setWhere(op_logic logic){
     }
 
     new->left_logic = logic;
-
 }
 
 void setCompWhereLeft(char **op_left, char type){ 
@@ -378,7 +377,7 @@ void setCompWhereRight(char **op_left, char type){
     for(aux = GLOBAL_SELECT.where; aux->next != NULL; aux = aux->next);
 
     aux->comp->right.value = malloc(sizeof(char)*(strlen(*op_left) + 1));
-    strcpy(aux->comp->right.value, &(*op_left)[isString ? 1 : 0 ]);
+    strcpy(aux->comp->right.value, &(*op_left)[isString ? 1 : 0 ]); // tratamento de '' nas strings
     if(isString)
         aux->comp->right.value[strlen(*op_left)-2] = '\0';
     else    

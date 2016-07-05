@@ -488,15 +488,9 @@ union yyalloc
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  59
 /* YYNRULES -- Number of rules.  */
-<<<<<<< HEAD
 #define YYNRULES  104
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  156
-=======
-#define YYNRULES  90
-/* YYNSTATES -- Number of states.  */
-#define YYNSTATES  135
->>>>>>> origin/master
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
@@ -553,16 +547,10 @@ static const yytype_uint8 yyrline[] =
      141,   143,   143,   145,   146,   147,   150,   150,   156,   156,
      158,   159,   159,   160,   161,   163,   165,   166,   167,   169,
      171,   174,   174,   174,   177,   177,   177,   180,   180,   180,
-<<<<<<< HEAD
      184,   184,   187,   189,   189,   189,   191,   196,   196,   196,
      198,   198,   198,   198,   198,   200,   200,   201,   201,   202,
      202,   203,   203,   204,   204,   205,   205,   207,   207,   207,
      207,   209,   209,   209,   209
-=======
-     184,   184,   186,   188,   188,   188,   190,   195,   195,   197,
-     197,   197,   197,   197,   197,   197,   197,   199,   201,   201,
-     201
->>>>>>> origin/master
 };
 #endif
 
@@ -618,7 +606,6 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-<<<<<<< HEAD
       15,    18,   -81,    -7,    -4,   -81,   -81,   -81,    -5,    13,
      -81,   -81,   -81,   -81,   -81,   -81,   -81,    36,   -81,   -81,
      -81,   -81,   -81,   -81,   -81,   -81,   -81,   -81,   -81,   -81,
@@ -635,22 +622,6 @@ static const yytype_int8 yypact[] =
       10,    27,    27,    27,    27,    27,    27,    44,    76,   -81,
      -81,   -81,   -81,   -81,   -81,   -81,   -81,   -81,   -81,   -81,
      -81,   -81,   -81,   -81,    53,   -81
-=======
-       8,    14,   -72,    -7,     0,   -72,   -72,   -72,     5,    28,
-     -72,   -72,   -72,   -72,   -72,   -72,   -72,    29,   -72,   -72,
-     -72,   -72,   -72,   -72,   -72,   -72,   -72,   -72,   -72,   -72,
-     -72,   -72,   -72,   -72,   -72,   -72,   -72,   -11,   -72,   -72,
-     -72,   -72,   -72,   -72,   -72,    36,   -72,   -72,    45,    18,
-      36,    43,    44,    46,   -72,    26,    48,   -11,    26,   -72,
-     -72,   -72,    49,    64,   -72,    40,   -72,    51,    30,    30,
-      30,   -72,    32,    31,    26,    56,    30,   -72,    32,    10,
-     -72,   -72,   -72,   -72,    49,    33,   -72,     7,   -72,    30,
-     -72,   -72,   -72,   -72,    -1,   -72,   -72,   -72,   -72,    32,
-      34,   -72,   -72,   -72,   -72,   -72,   -72,   -72,   -72,    39,
-     -72,    26,    61,    59,    37,    30,    33,   -72,   -72,   -72,
-     -72,    62,   -72,   -72,    41,    51,   -72,   -72,    32,    60,
-     -72,   -72,   -72,    42,   -72
->>>>>>> origin/master
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -665,7 +636,6 @@ static const yytype_uint8 yydefact[] =
       61,    67,    27,    21,     1,     0,    76,    73,     0,    74,
        0,     0,     0,     0,    35,    36,     0,     0,     0,    65,
       62,    68,     0,     0,    72,    77,    75,     0,     0,     0,
-<<<<<<< HEAD
        0,    40,     0,    38,     0,    78,     0,    55,     0,     0,
       66,    63,    69,    37,     0,     0,     0,    71,     0,    50,
       51,    53,    54,    56,    39,    44,    43,    45,     0,    41,
@@ -675,34 +645,17 @@ static const yytype_uint8 yydefact[] =
        0,     0,     0,     0,     0,     0,     0,     0,     0,    49,
       84,    82,   101,   103,   102,   104,    86,    88,    90,    92,
       94,    96,    52,    60,     0,    58
-=======
-       0,    40,     0,    38,     0,     0,     0,    55,     0,     0,
-      66,    63,    69,    37,     0,     0,    87,     0,    71,     0,
-      50,    51,    53,    54,    56,    39,    44,    43,    45,     0,
-      41,    79,    80,    81,    82,    83,    84,    85,    86,     0,
-      47,     0,     0,     0,    48,     0,     0,    90,    89,    88,
-      78,     0,    57,    59,     0,     0,    33,    42,     0,     0,
-      49,    52,    60,     0,    58
->>>>>>> origin/master
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-<<<<<<< HEAD
      -81,   -81,   -81,   -81,   -81,   -81,   -54,   -72,   -81,   -81,
      -81,   -81,   -81,   -81,   -81,   -61,    50,   -81,     8,   -81,
      -17,   -81,   -81,   -81,   -29,   -81,   -81,   -81,   -81,   -81,
      -81,   -81,   -81,   -81,   -81,   -81,   -81,   -81,   -81,   -81,
      -81,   -81,   -81,    41,   -81,   -81,   -81,   -81,   -81,   -81,
      -80,   -81,   -81,   -81,   -81,   -81,   -81,   -81,   -66
-=======
-     -72,   -72,   -72,   -72,   -72,   -72,   -55,   -71,   -72,   -72,
-     -72,   -72,   -72,   -72,   -72,   -64,    35,   -72,     2,   -72,
-     -32,   -72,   -72,   -72,   -38,   -72,   -72,   -72,   -72,   -72,
-     -72,   -72,   -72,   -72,   -72,   -72,   -72,   -72,   -72,   -72,
-     -72,   -72,   -72,    38,   -72,   -72,   -72,   -72,   -72
->>>>>>> origin/master
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -710,16 +663,10 @@ static const yytype_int16 yydefgoto[] =
 {
       -1,    17,    18,    19,    20,    21,    22,    23,    24,    25,
       26,    27,    28,    29,    45,    30,    55,    63,    72,    73,
-<<<<<<< HEAD
       98,    99,    31,    50,    78,    93,   108,    79,   111,   125,
      154,    32,    52,    69,    33,    51,    68,    34,    53,    70,
       35,    37,    65,    48,    49,    76,    86,   104,   130,   129,
      105,   131,   132,   133,   134,   135,   136,   106,   146
-=======
-      99,   100,    31,    50,    78,    94,   111,    79,   114,   124,
-     133,    32,    52,    69,    33,    51,    68,    34,    53,    70,
-      35,    37,    65,    48,    49,    76,   109,    87,   120
->>>>>>> origin/master
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -727,7 +674,6 @@ static const yytype_int16 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-<<<<<<< HEAD
       83,    62,    38,    46,    67,    40,    88,    80,    81,    82,
       39,    95,    96,    41,    42,    87,    97,   109,     1,   110,
       85,     2,    36,     3,   114,   115,   112,   107,    47,   100,
@@ -739,23 +685,10 @@ static const yytype_uint8 yytable[] =
       74,    71,    75,    77,    16,    15,    84,   123,   124,   138,
      113,   126,    94,   137,   155,   153,   128,   139,    66,     0,
       58
-=======
-      62,    83,    38,    67,    80,    81,    82,    89,    46,    40,
-      39,     1,    88,   112,     2,   113,     3,    41,    36,    85,
-      90,    91,    92,    93,    42,   110,     4,     5,   115,    44,
-       6,     7,     8,    47,     9,    10,    11,    12,    13,   101,
-     102,   103,   104,   105,   106,   107,   108,    43,    14,    15,
-      16,   126,    56,    96,    97,    54,   121,   131,    98,   117,
-     118,    57,    59,    60,   119,    61,    14,    64,    71,    74,
-      77,    75,    16,    15,    84,    86,   122,   116,   123,   132,
-     125,   129,   128,   134,   127,    58,    95,   130,     0,     0,
-       0,     0,     0,     0,     0,    66
->>>>>>> origin/master
 };
 
 static const yytype_int16 yycheck[] =
 {
-<<<<<<< HEAD
       72,    55,     9,    19,    58,     9,    78,    68,    69,    70,
       17,    20,    21,    17,    19,    76,    25,    14,     3,    16,
       74,     6,     4,     8,    32,    33,    98,    88,    44,    19,
@@ -767,18 +700,6 @@ static const yytype_int16 yycheck[] =
        5,    19,    31,    19,    42,    41,    43,    15,    19,    40,
       43,    43,    84,    20,    41,    19,   113,   126,    57,    -1,
       50
-=======
-      55,    72,     9,    58,    68,    69,    70,    78,    19,     9,
-      17,     3,    76,    14,     6,    16,     8,    17,     4,    74,
-      10,    11,    12,    13,    19,    89,    18,    19,    99,     0,
-      22,    23,    24,    44,    26,    27,    28,    29,    30,    32,
-      33,    34,    35,    36,    37,    38,    39,    19,    40,    41,
-      42,   115,     7,    20,    21,    19,   111,   128,    25,    20,
-      21,    43,    19,    19,    25,    19,    40,    19,    19,     5,
-      19,    31,    42,    41,    43,    19,    15,    43,    19,    19,
-      43,    40,    20,    41,   116,    50,    84,   125,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    57
->>>>>>> origin/master
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -793,7 +714,6 @@ static const yytype_uint8 yystos[] =
       68,    80,    77,    83,    19,    61,     7,    43,    61,    19,
       19,    19,    51,    62,    19,    87,    88,    51,    81,    78,
       84,    19,    63,    64,     5,    31,    90,    19,    69,    72,
-<<<<<<< HEAD
       60,    60,    60,    52,    43,    51,    91,    60,    52,    10,
       11,    12,    13,    70,    63,    20,    21,    25,    65,    66,
       19,    20,    21,    25,    92,    95,   102,    60,    71,    14,
@@ -802,14 +722,6 @@ static const yytype_uint8 yystos[] =
       93,    96,    97,    98,    99,   100,   101,    20,    40,    69,
       95,    95,    19,    20,    21,    25,   103,   103,   103,   103,
      103,   103,    52,    19,    75,    41
-=======
-      60,    60,    60,    52,    43,    51,    19,    92,    60,    52,
-      10,    11,    12,    13,    70,    63,    20,    21,    25,    65,
-      66,    32,    33,    34,    35,    36,    37,    38,    39,    91,
-      60,    71,    14,    16,    73,    52,    43,    20,    21,    25,
-      93,    51,    15,    19,    74,    43,    60,    65,    20,    40,
-      69,    52,    19,    75,    41
->>>>>>> origin/master
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -822,16 +734,10 @@ static const yytype_uint8 yyr1[] =
       64,    65,    65,    66,    66,    66,    68,    67,    69,    69,
       70,    71,    70,    70,    70,    72,    73,    73,    73,    74,
       75,    77,    78,    76,    80,    81,    79,    83,    84,    82,
-<<<<<<< HEAD
       86,    85,    87,    88,    88,    88,    89,    90,    91,    90,
       92,    93,    92,    94,    92,    96,    95,    97,    95,    98,
       95,    99,    95,   100,    95,   101,    95,   102,   102,   102,
      102,   103,   103,   103,   103
-=======
-      86,    85,    87,    88,    88,    88,    89,    90,    90,    91,
-      91,    91,    91,    91,    91,    91,    91,    92,    93,    93,
-      93
->>>>>>> origin/master
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -844,16 +750,10 @@ static const yytype_uint8 yyr2[] =
        1,     1,     3,     1,     1,     1,     0,     8,     3,     5,
        1,     0,     5,     1,     1,     1,     0,     2,     5,     1,
        1,     0,     0,     6,     0,     0,     6,     0,     0,     6,
-<<<<<<< HEAD
        0,     7,     1,     1,     1,     3,     1,     0,     0,     3,
        1,     0,     4,     0,     4,     0,     4,     0,     4,     0,
        4,     0,     4,     0,     4,     0,     4,     1,     1,     1,
        1,     1,     1,     1,     1
-=======
-       0,     7,     1,     1,     1,     3,     1,     0,     4,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1
->>>>>>> origin/master
 };
 
 
@@ -1532,71 +1432,43 @@ yyreduce:
         case 12:
 #line 63 "yacc.y" /* yacc.c:1646  */
     {GLOBAL_PARSER.consoleFlag = 1; return 0;}
-<<<<<<< HEAD
 #line 1436 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1423 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 21:
 #line 72 "yacc.y" /* yacc.c:1646  */
     {connect(*yytext); GLOBAL_PARSER.consoleFlag = 1; return 0;}
-<<<<<<< HEAD
 #line 1442 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1429 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 22:
 #line 74 "yacc.y" /* yacc.c:1646  */
     {GLOBAL_PARSER.consoleFlag = 1; GLOBAL_PARSER.noerror = 0; return 0;}
-<<<<<<< HEAD
 #line 1448 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1435 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 23:
 #line 77 "yacc.y" /* yacc.c:1646  */
     {exit(0);}
-<<<<<<< HEAD
 #line 1454 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1441 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 24:
 #line 79 "yacc.y" /* yacc.c:1646  */
     {clear(); GLOBAL_PARSER.consoleFlag = 1; return 0;}
-<<<<<<< HEAD
 #line 1460 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1447 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 25:
 #line 81 "yacc.y" /* yacc.c:1646  */
     {GLOBAL_PARSER.parentesis++;}
-<<<<<<< HEAD
 #line 1466 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1453 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 26:
 #line 83 "yacc.y" /* yacc.c:1646  */
     {GLOBAL_PARSER.parentesis--;}
-<<<<<<< HEAD
 #line 1472 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1459 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 27:
@@ -1609,11 +1481,7 @@ yyreduce:
         notConnected();
     return 0;
 }
-<<<<<<< HEAD
 #line 1485 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1472 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 28:
@@ -1626,11 +1494,7 @@ yyreduce:
         notConnected();
     return 0;
 }
-<<<<<<< HEAD
 #line 1498 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1485 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 29:
@@ -1640,41 +1504,25 @@ yyreduce:
     GLOBAL_PARSER.consoleFlag = 1;
     return 0;
 }
-<<<<<<< HEAD
 #line 1508 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1495 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 30:
 #line 113 "yacc.y" /* yacc.c:1646  */
     {help(); GLOBAL_PARSER.consoleFlag = 1; return 0;}
-<<<<<<< HEAD
 #line 1514 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1501 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 31:
 #line 116 "yacc.y" /* yacc.c:1646  */
     {contr(); GLOBAL_PARSER.consoleFlag = 1; return 0;}
-<<<<<<< HEAD
 #line 1520 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1507 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 32:
 #line 123 "yacc.y" /* yacc.c:1646  */
     {setMode(OP_INSERT);}
-<<<<<<< HEAD
 #line 1526 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1513 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 33:
@@ -1688,71 +1536,43 @@ yyreduce:
     }
     return 0;
 }
-<<<<<<< HEAD
 #line 1540 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1527 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 35:
 #line 135 "yacc.y" /* yacc.c:1646  */
     {setObjName(yytext);}
-<<<<<<< HEAD
 #line 1546 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1533 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 40:
 #line 141 "yacc.y" /* yacc.c:1646  */
     {setColumnInsert(yytext);}
-<<<<<<< HEAD
 #line 1552 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1539 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 43:
 #line 145 "yacc.y" /* yacc.c:1646  */
     {setValueInsert(yylval.strval, 'D');}
-<<<<<<< HEAD
 #line 1558 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1545 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 44:
 #line 146 "yacc.y" /* yacc.c:1646  */
     {setValueInsert(yylval.strval, 'I');}
-<<<<<<< HEAD
 #line 1564 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1551 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 45:
 #line 147 "yacc.y" /* yacc.c:1646  */
     {setValueInsert(yylval.strval, 'S');}
-<<<<<<< HEAD
 #line 1570 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1557 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 46:
 #line 150 "yacc.y" /* yacc.c:1646  */
     {setMode(OP_CREATE_TABLE);}
-<<<<<<< HEAD
 #line 1576 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1563 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 47:
@@ -1762,207 +1582,126 @@ yyreduce:
 
     return 0;
 }
-<<<<<<< HEAD
 #line 1586 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1573 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 50:
 #line 158 "yacc.y" /* yacc.c:1646  */
     {setColumnTypeCreate('I');}
-<<<<<<< HEAD
 #line 1592 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1579 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 51:
 #line 159 "yacc.y" /* yacc.c:1646  */
     {setColumnTypeCreate('S');}
-<<<<<<< HEAD
 #line 1598 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1585 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 52:
 #line 159 "yacc.y" /* yacc.c:1646  */
     {setColumnSizeCreate(yylval.strval);}
-<<<<<<< HEAD
 #line 1604 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1591 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 53:
 #line 160 "yacc.y" /* yacc.c:1646  */
     {setColumnTypeCreate('D');}
-<<<<<<< HEAD
 #line 1610 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1597 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 54:
 #line 161 "yacc.y" /* yacc.c:1646  */
     {setColumnTypeCreate('C');}
-<<<<<<< HEAD
 #line 1616 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1603 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 55:
 #line 163 "yacc.y" /* yacc.c:1646  */
     {setColumnCreate(yytext);}
-<<<<<<< HEAD
 #line 1622 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1609 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 57:
 #line 166 "yacc.y" /* yacc.c:1646  */
     {setColumnPKCreate();}
-<<<<<<< HEAD
 #line 1628 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1615 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 59:
 #line 169 "yacc.y" /* yacc.c:1646  */
     {setColumnFKTableCreate(yytext);}
-<<<<<<< HEAD
 #line 1634 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1621 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 60:
 #line 171 "yacc.y" /* yacc.c:1646  */
     {setColumnFKColumnCreate(yytext);}
-<<<<<<< HEAD
 #line 1640 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1627 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 61:
 #line 174 "yacc.y" /* yacc.c:1646  */
     {setMode(OP_DROP_TABLE);}
-<<<<<<< HEAD
 #line 1646 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1633 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 62:
 #line 174 "yacc.y" /* yacc.c:1646  */
     {setObjName(yytext);}
-<<<<<<< HEAD
 #line 1652 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1639 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 63:
 #line 174 "yacc.y" /* yacc.c:1646  */
     {return 0;}
-<<<<<<< HEAD
 #line 1658 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1645 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 64:
 #line 177 "yacc.y" /* yacc.c:1646  */
     {setMode(OP_CREATE_DATABASE);}
-<<<<<<< HEAD
 #line 1664 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1651 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 65:
 #line 177 "yacc.y" /* yacc.c:1646  */
     {setObjName(yytext);}
-<<<<<<< HEAD
 #line 1670 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1657 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 66:
 #line 177 "yacc.y" /* yacc.c:1646  */
     {return 0;}
-<<<<<<< HEAD
 #line 1676 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1663 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 67:
 #line 180 "yacc.y" /* yacc.c:1646  */
     {setMode(OP_DROP_DATABASE);}
-<<<<<<< HEAD
 #line 1682 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1669 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 68:
 #line 180 "yacc.y" /* yacc.c:1646  */
     {setObjName(yytext);}
-<<<<<<< HEAD
 #line 1688 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1675 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 69:
 #line 180 "yacc.y" /* yacc.c:1646  */
     {return 0;}
-<<<<<<< HEAD
 #line 1694 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1681 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 70:
 #line 184 "yacc.y" /* yacc.c:1646  */
     {setMode(OP_SELECT_ALL);}
-<<<<<<< HEAD
 #line 1700 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1687 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 71:
 #line 184 "yacc.y" /* yacc.c:1646  */
     {return 0;}
-<<<<<<< HEAD
 #line 1706 "y.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1970,21 +1709,11 @@ yyreduce:
 #line 187 "yacc.y" /* yacc.c:1646  */
     {setObjNameSelect(yytext);}
 #line 1712 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1693 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 72:
-#line 186 "yacc.y" /* yacc.c:1646  */
-    {setObjName(yytext);}
-#line 1699 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 76:
 #line 191 "yacc.y" /* yacc.c:1646  */
     {setColumnProjection(yytext);}
-<<<<<<< HEAD
 #line 1718 "y.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1998,15 +1727,6 @@ yyreduce:
 #line 198 "yacc.y" /* yacc.c:1646  */
     {setWhere(logic_OR);}
 #line 1730 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1705 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 87:
-#line 199 "yacc.y" /* yacc.c:1646  */
-    {setColumnTest(yytext);}
-#line 1711 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 83:
@@ -2023,25 +1743,8 @@ yyreduce:
 
   case 87:
 #line 201 "yacc.y" /* yacc.c:1646  */
-<<<<<<< HEAD
     {setCompWhereOp(LT);}
 #line 1748 "y.tab.c" /* yacc.c:1646  */
-=======
-    {addTypeValue(ALPHANUM_TYPE);addValueTest(*yytext);}
-#line 1717 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 89:
-#line 201 "yacc.y" /* yacc.c:1646  */
-    {addTypeValue(NUMBER_TYPE);addValueTest(*yytext);}
-#line 1723 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 90:
-#line 201 "yacc.y" /* yacc.c:1646  */
-    {addTypeValue(INT_TYPE);addValueTest(*yytext);}
-#line 1729 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
     break;
 
   case 89:
@@ -2050,7 +1753,6 @@ yyreduce:
 #line 1754 "y.tab.c" /* yacc.c:1646  */
     break;
 
-<<<<<<< HEAD
   case 91:
 #line 203 "yacc.y" /* yacc.c:1646  */
     {setCompWhereOp(NQ);}
@@ -2119,9 +1821,6 @@ yyreduce:
 
 
 #line 1824 "y.tab.c" /* yacc.c:1646  */
-=======
-#line 1733 "y.tab.c" /* yacc.c:1646  */
->>>>>>> origin/master
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
