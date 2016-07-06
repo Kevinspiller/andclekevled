@@ -1,13 +1,21 @@
 UNIVERSIDADE FEDERAL DA FRONTEIRA SUL - UFFS
+
 Campus: Chapecó - SC
+
 Curso: Ciência da Computação
+
 Componente Curricular: Banco de dados II
+
 Professor: Dr. Denio Duarte
+
 Acadêmicos: André Luiz Hofer (1411100009), Cleiton A. Ambrosini (1411100039), Kevin M. Spiller (1211100049) e Marcelo Acordi (1411100007)
+
 Projeto: UFFSDB
+
 Link GitHub: https://github.com/Kevinspiller/andclekevledmar
 
 ******** Final Project ********
+
 Considerações importantes:
 
 - Para fazer a condição de diferença entre dois operandos na clausula where usa-se apenas '!='
