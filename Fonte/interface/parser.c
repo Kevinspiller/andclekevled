@@ -384,6 +384,7 @@ void setCompWhereLeft(char **op_left, char type){
         aux->comp->left.value[strlen(*op_left)-2] = '\0'; // tratamento de '' nas strings
     else    
         aux->comp->left.value += '\0';
+
     aux->comp->left.type = type;
 }
 /* ----------------------------------------------------------------------------------
@@ -404,7 +405,7 @@ void setCompWhereOp(operation op){
 -------------------------------------------------------------------------------------------------------------*/
 void setCompWhereRight(char **op_left, char type){ 
     rc_where * aux;
-    bool isString = type == 'S';
+    bool isString = (type == 'S');
 
     for(aux = GLOBAL_SELECT.where; aux->next != NULL; aux = aux->next);
 
@@ -414,6 +415,7 @@ void setCompWhereRight(char **op_left, char type){
         aux->comp->right.value[strlen(*op_left)-2] = '\0'; // tratamento de '' nas strings
     else    
         aux->comp->right.value += '\0';
+
     aux->comp->right.type = type;
 }
 

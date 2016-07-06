@@ -678,7 +678,10 @@ bool comparerValues(char type, char *value_left, char *value_right, operation op
     return FALSE;
 }
 /* -----------------------------------------------------------------------------------------------------------------
-	getStrValue: 
+	getStrValue: converte os bytes lidos do disco de acordo com o tipo passado para o tipo texto.
+				 pq ele le do disco como ponteiro de char independente do tipo que foi gravado por
+				 isso é necessario fazer a conversão do valor para depois fazer as operações.
+				 O retorno é uma string.
 -------------------------------------------------------------------------------------------------------------------*/
 char ** getStrValue(char * source, char type){
     char **result;
@@ -702,67 +705,71 @@ char ** getStrValue(char * source, char type){
     return result;
 }
 /* -----------------------------------------------------------------------------------------------------------------
-	where_check: 
+	se tiver uma condição tipo a or c and b ele faz na ordem da esquerda para direita sem considerar
+	a precedencia de operador e não primeiro o and e dps o or.
 -------------------------------------------------------------------------------------------------------------------*/
 bool where_check(rc_select *GLOBAL_SELECT, column *pagina, int start, int nr_campos){
     rc_where *aux;
     bool result = TRUE;
     int j;
     char *val_left = NULL, *val_right = NULL;
-    char type_left, type_right;
+    char type;
 
-    for(aux = GLOBAL_SELECT->where; aux != NULL; aux = aux->next){
-        if(!result && aux->left_logic == logic_AND)
-            continue;
+    for(aux = GLOBAL_SELECT->where; aux != NULL; aux = aux->next){ // laço percorrendo todos as condições da lista do where
+        if(!result && aux->left_logic == logic_AND) // se o resultado atual é FALSE e o comparador atual for AND não precisa fazer a comparação pois o resultado é falso										
+            continue;								 
 
-        if(result && aux->left_logic == logic_OR)
-            continue;
+        if(result && aux->left_logic == logic_OR)// se o resultado atual é TRUE e o comparador atual for OR não precisa fazer a comparação pois o resultado é TRUE
+            continue;							 
 
-        if(aux->comp->left.type == 'C' || aux->comp->right.type == 'C'){
-            for(j = 0; j < nr_campos; j++){
+        if(aux->comp->left.type == 'C' || aux->comp->right.type == 'C'){ // se o o usuario digitou um valor tipo C (coluna) então busca o valor da coluna na pagina
+            for(j = 0; j < nr_campos; j++){ // percore as tuplas da tabela 
 	            if(aux->comp->left.type == 'C'){
-	                if(strcmp(aux->comp->left.value, pagina[j+start].nomeCampo) == 0){
-
-                        if(pagina[j+start].tipoCampo == 'C')
-                            type_left = 'S';
+	                if(strcmp(aux->comp->left.value, pagina[j+start].nomeCampo) == 0){ // compara o nome na tupla com o nome que o usuario digitou no where
+                        if(pagina[j+start].tipoCampo == 'C') // se o valor da tupla for do tipo char
+                            type = 'S'; 				// converte para tipo S para ficar compativel com a estrutura criada
 	                    else
-	                        type_left = pagina[j+start].tipoCampo;
+	                        type = pagina[j+start].tipoCampo; 
 
-                        val_left = *getStrValue(pagina[j+start].valorCampo, type_left);
+                        val_left = *getStrValue(pagina[j+start].valorCampo, type); // chama função para converte o valor lido na tupla para string
 	                }
                 }
 	            if(aux->comp->right.type == 'C'){
 	                if(strcmp(aux->comp->right.value, pagina[j+start].nomeCampo) == 0){
 	                   if(pagina[j+start].tipoCampo == 'C')
-	                        type_right = 'S';
+	                        type = 'S';
 	                    else
-	                        type_right = pagina[j+start].tipoCampo;
+	                        type = pagina[j+start].tipoCampo;
 	                    
-	                    val_right = *getStrValue(pagina[j+start].valorCampo, type_right);
+	                    val_right = *getStrValue(pagina[j+start].valorCampo, type);
 	                }
 	            }
             }
         }
 
-        if(aux->comp->left.type != 'C'){            
-            val_left = malloc(sizeof(char)*(strlen(aux->comp->left.value) + 1));
+        //if(aux->comp->right.type == 'C')
+        //	type_left = type_right;
+
+        /* comparaçoes para pegar o valor que o usuario digitou sem que seja uma coluna */
+        if(aux->comp->left.type != 'C'){    // se o valor que o usurario digitou não for uma coluna então apenas copia o valor          
+            val_left = malloc(sizeof(char)*(strlen(aux->comp->left.value) + 1)); // + 1 por causa do \0 no final da string
             strcpy(val_left, aux->comp->left.value);
             val_left += '\0';
         }
-        if(aux->comp->right.type != 'C'){            
+        if(aux->comp->right.type != 'C'){ // se o valor que o usurario digitou não for uma coluna então apenas copia o que o valor      
             val_right = malloc(sizeof(char)*(strlen(aux->comp->right.value) + 1));
             strcpy(val_right, aux->comp->right.value);
             val_right += '\0';
         }
-        if(val_left == NULL || val_right == NULL){
+        if(val_left == NULL || val_right == NULL){ // para saber se a coluna existe na tabela 
             printf("Error object not found\n");
             return FALSE;
         }
 
-        if(aux->left_logic == logic_OR)
-            result = result || comparerValues(type_left, val_left, val_right, aux->comp->op);
-        else
-            result = result && comparerValues(type_left, val_left, val_right, aux->comp->op);
+        if(aux->left_logic == logic_OR) // se for OR ele entra nesse if
+            result = result || comparerValues(type, val_left, val_right, aux->comp->op);
+        else // se for AND ou NONE (NONE = primeira comparação) ele faz essa comparação. O result ja vem como TRUE inicialmente e AND so funciona se for dois TRUE
+            result = result && comparerValues(type, val_left, val_right, aux->comp->op);
     }
     return result;
 }
@@ -818,21 +825,21 @@ void imprime(rc_select *GLOBAL_SELECT) {
                 if(GLOBAL_SELECT->nColumn > 0) {
                     for(checkRun = 0; checkRun < GLOBAL_SELECT->nColumn;checkRun++) {
                         if(strcmp(GLOBAL_SELECT->columnName[checkRun],pagina[j].nomeCampo)==0) {
-                                  if (pagina[j].tipoCampo == 'S')
-                                    printf(" %-20s ", pagina[j].nomeCampo);
-                                  else
-                                    printf(" %-10s ", pagina[j].nomeCampo);
-                                if (j < objeto.qtdCampos - 1)
-                                    printf("|");
+                          	if (pagina[j].tipoCampo == 'S')
+                            printf(" %-20s ", pagina[j].nomeCampo);
+                          	else
+                            printf(" %-10s ", pagina[j].nomeCampo);
+                            if (j < objeto.qtdCampos - 1)
+                                printf("|");
                         }
                     }
                 }else{
-                            if (pagina[j].tipoCampo == 'S')
-                                printf(" %-20s ", pagina[j].nomeCampo);
-                            else
-                                printf(" %-10s ", pagina[j].nomeCampo);
-                            if (j < objeto.qtdCampos - 1)
-                                printf("|");
+                    if (pagina[j].tipoCampo == 'S')
+                        printf(" %-20s ", pagina[j].nomeCampo);
+                    else
+                        printf(" %-10s ", pagina[j].nomeCampo);
+                    if (j < objeto.qtdCampos - 1)
+                        printf("|");
                 }
 				
 			}
@@ -873,32 +880,32 @@ void imprime(rc_select *GLOBAL_SELECT) {
                     if(state == 1) {
                                 
                             if (pagina[j].tipoCampo == 'S')
-                                printf(" %-20s ", pagina[j].valorCampo);
+                                printf(" %-20s |", pagina[j].valorCampo);
                             else if (pagina[j].tipoCampo == 'I') {
                                 int *n = (int *)&pagina[j].valorCampo[0];
-                                printf(" %-10d ", *n);
+                                printf(" %-10d |", *n);
                             }
                             else if (pagina[j].tipoCampo == 'C') {
-                                printf(" %-10c ", pagina[j].valorCampo[0]);
+                                printf(" %-10c |", pagina[j].valorCampo[0]);
                             }
                             else if (pagina[j].tipoCampo == 'D') {
                                 double *n = (double *)&pagina[j].valorCampo[0];
-                                printf(" %-10f ", *n);
+                                printf(" %-10f |", *n);
                             }            
                     }
                 }else{
                             if (pagina[j].tipoCampo == 'S')
-                                printf(" %-20s ", pagina[j].valorCampo);
+                                printf(" %-20s |", pagina[j].valorCampo);
                             else if (pagina[j].tipoCampo == 'I') {
                                 int *n = (int *)&pagina[j].valorCampo[0];
-                                printf(" %-10d ", *n);
+                                printf(" %-10d |", *n);
                             }
                             else if (pagina[j].tipoCampo == 'C') {
-                                printf(" %-10c ", pagina[j].valorCampo[0]);
+                                printf(" %-10c |", pagina[j].valorCampo[0]);
                             }
                             else if (pagina[j].tipoCampo == 'D') {
                                 double *n = (double *)&pagina[j].valorCampo[0];
-                                printf(" %-10f ", *n);
+                                printf(" %-10f |", *n);
                             }             
                 }
                 if (j >= 1 && ((j + 1) % objeto.qtdCampos) == 0)

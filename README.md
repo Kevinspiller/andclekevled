@@ -15,6 +15,10 @@ Considerações importantes:
 - As funções e structs criadas e/ou modificadas contem comentários antes do inicio das mesmas explicando como
 elas funcionam e o que elas fazem.
 
+- se na tabela tiver as colunas nome, idade, cidade nessa sequência e fizer um select com cidade, nome e idade
+  ex. select cidade, nome, idade from tabela. O resultado será monstrado conforme a sequência de colunas que está na tabela
+  e não na sequência definida no select.
+
 ******** Finding and fixing bugs ********
 
   O arquivo log-erros.txt, é o report gerado pelo Valgrind, quanto aos vazamentos de memória.
