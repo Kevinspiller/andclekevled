@@ -93,32 +93,31 @@ union c_int{
 
 /***** WHERE ********/
 
-typedef struct operating{   //estrutura para dados de uma condição do where
+typedef struct operating{   //estruct para dados de uma condição do where
     char *value;           //valor ou nome da coluna do operando
     char type;            // tipo do operando
 }operating;
 
-typedef struct rc_where_comp {     //Estrutura auxiliar das condições do where  
-    operating left;               //Coluna ou valor do compo de teste do lado esquedo do teste 
+typedef struct rc_where_comp {     //Estruct para auxiliar as condições do where  
+    operating left;               //Coluna ou valor do campo de teste do lado esquedo do teste 
     operation op;                //operacao entre os operadores (=,!,<,>) 
-    operating right;            //Coluna ou valor do compo de teste do lado esquedo do teste
+    operating right;            //Coluna ou valor do campo de teste do lado direito do teste
 }rc_where_comp;
 
-typedef struct rc_where{      //estrutura do comando where
+typedef struct rc_where{      //estruct dos nodos do where
     rc_where_comp *comp;     //lista de comparaçoes
-    struct rc_where *next;  //proxima comparação do where
-    op_logic left_logic;   //operação logica com a clausula anterior, no primeiro sera "NONE"
+    struct rc_where *next;  //proximo nodo de comparação do where
+    op_logic left_logic;   //operação logica com o nodo anterior, no primeiro sera "NONE"
 }rc_where;
 
 /***** SELECT ********/
-typedef struct rc_select{    // estrutura das colunas das projeções do select
+
+typedef struct rc_select{    // estruct do cabeçalho da lista
     char *objName;          // Nome da tabela do select
     char **columnName;     // lista de colunas
     int nColumn;          // numero de colunas
-    rc_where *where;
+    rc_where *where;     // ponteiro para o inicio da lista dos where
 }rc_select;
 
 
 extern db_connected connected;
-/************************************************************************************************
- ************************************************************************************************/

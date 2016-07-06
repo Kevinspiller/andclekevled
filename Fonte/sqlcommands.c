@@ -708,7 +708,7 @@ bool where_check(rc_select *GLOBAL_SELECT, column *pagina, int start, int nr_cam
     rc_where *aux;
     bool result = TRUE;
     int j;
-    char *val_left = NULL, *val_right;
+    char *val_left = NULL, *val_right = NULL;
     char type_left, type_right;
 
     for(aux = GLOBAL_SELECT->where; aux != NULL; aux = aux->next){

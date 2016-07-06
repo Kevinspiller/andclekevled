@@ -328,6 +328,17 @@ void setColumnProjection(char **name) {
     GLOBAL_SELECT.nColumn++;
 }
 
+/*------------------------------------------------
+resetSelect: resetar os ponteiros para a projeção
+-------------------------------------------------*/
+void resetSelect(){
+    free(GLOBAL_SELECT.objName);
+    GLOBAL_SELECT.objName = NULL;
+    free(GLOBAL_SELECT.columnName);
+    GLOBAL_SELECT.columnName = NULL;
+    GLOBAL_SELECT.nColumn = 0;
+}
+
 /********** where ********/
 
 /* ----------------------------------------------------------------------------------------------
@@ -405,13 +416,4 @@ void setCompWhereRight(char **op_left, char type){
         aux->comp->right.value += '\0';
     aux->comp->right.type = type;
 }
-/*------------------------------------------------
-resetSelect: resetar os ponteiros para a projeção
--------------------------------------------------*/
-void resetSelect(){
-    free(GLOBAL_SELECT.objName);
-    GLOBAL_SELECT.objName = NULL;
-    free(GLOBAL_SELECT.columnName);
-    GLOBAL_SELECT.columnName = NULL;
-    GLOBAL_SELECT.nColumn = 0;
-}
+
